@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Cloaker - Dating Zeydoo</title>
+<script>
+// Função para buscar país pelo IP
+async function verificarGeo() {
+    try {
+        let resp = await fetch("https://ipapi.co/json/");
+        let dados = await resp.json();
+        let pais = dados.country; // Ex: "CA", "BR", "US"
+
+        console.log("Seu país detectado:", pais);
+
+        // Lista de países alvo (adapte conforme targeting da oferta)
+        let paisesPermitidos = ["CA", "JP", "DE", "FR", "ES", "NO", "SE", "SG"];
+
+        if (paisesPermitidos.includes(pais)) {
+            // Envia para o link real da Zeydoo
+            window.location.href = "https://sgben.com/link?z=9692996&var={SOURCE_ID}&ymid={CLICK_ID}";
+        } else {
+            // Envia para um espelho (para teste em qualquer lugar)
+            window.location.href = "https://www.google.com"; // Troque para outro destino
+        }
+    } catch (e) {
+        console.error("Erro ao detectar país:", e);
+        // Fallback
+        window.location.href = "https://www.google.com";
+    }
+}
+
+verificarGeo();
+</script>
+</head>
+<body>
+<p>Verificando acesso...</p>
+</body>
+</html>
