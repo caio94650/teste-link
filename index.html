@@ -1,101 +1,258 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Dicas para Melhorar sua Vida Amorosa</title>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Dicas para Melhorar sua Vida Amorosa — Guia Completo</title>
+<meta name="description" content="Um guia prático, 100% white, com dicas de comunicação, confiança e hábitos para fortalecer relações.">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="preconnect" href="https://fonts.googleapis.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700;800&family=Merriweather:wght@700;900&display=swap" rel="stylesheet">
+<meta property="og:title" content="Dicas para Melhorar sua Vida Amorosa — Guia Completo">
+<meta property="og:description" content="Guia prático e seguro para fortalecer relacionamentos.">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://images.unsplash.com/photo-1511715289091-2f4b52a3a4d4?q=80&w=1200&auto=format&fit=crop">
+<meta name="theme-color" content="#e11936">
 <style>
-    body {
-        font-family: Arial, sans-serif;
-        background: #ffffff;
-        margin: 0;
-        padding: 0;
-        color: #333;
-        line-height: 1.6;
-    }
-    header {
-        background: #fff;
-        padding: 20px;
-        text-align: center;
-        border-bottom: 3px solid #eee;
-    }
-    header h1 {
-        color: red;
-        font-size: 28px;
-        margin: 0;
-    }
-    .container {
-        max-width: 800px;
-        margin: auto;
-        padding: 20px;
-    }
-    h2 {
-        color: #444;
-        margin-top: 30px;
-    }
-    p {
-        margin-bottom: 15px;
-    }
-    .cta {
-        text-align: center;
-        margin-top: 30px;
-    }
-    .cta a {
-        display: inline-block;
-        background: red;
-        color: white;
-        padding: 14px 28px;
-        border-radius: 5px;
-        text-decoration: none;
-        font-size: 18px;
-        font-weight: bold;
-        transition: background 0.3s ease;
-    }
-    .cta a:hover {
-        background: darkred;
-    }
-    footer {
-        background: #f4f4f4;
-        padding: 15px;
-        text-align: center;
-        font-size: 14px;
-        color: #666;
-        margin-top: 40px;
-    }
+  :root{
+    --bg:#ffffff; --text:#1a1d23; --muted:#5b667a; --line:#e9eef5;
+    --brand:#e11936; --brand-dark:#b30f2a; --accent:#ffecf0;
+    --card:#ffffff; --shadow:0 10px 28px rgba(16,24,40,.06);
+  }
+  *{box-sizing:border-box}
+  html,body{height:100%}
+  body{
+    margin:0; background:var(--bg); color:var(--text);
+    font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;
+    line-height:1.6;
+  }
+  /* Header */
+  .topbar{border-bottom:1px solid var(--line); background:#fff; position:sticky; top:0; z-index:20}
+  .nav{max-width:1100px; margin:0 auto; padding:14px 18px; display:flex; align-items:center; gap:18px}
+  .brand{display:flex; align-items:center; gap:10px; font-weight:800; letter-spacing:.2px}
+  .brand-badge{width:30px; height:30px; border-radius:8px; display:grid; place-items:center; color:#fff;
+    background:var(--brand); box-shadow:var(--shadow)}
+  .brand-title{font-size:18px}
+  .nav-links{margin-left:auto; display:flex; gap:14px}
+  .nav-links a{color:var(--muted); text-decoration:none; font-weight:600}
+  .nav-links a:hover{color:var(--text)}
+  /* Hero */
+  .hero{max-width:1100px; margin:24px auto; padding:0 18px; display:grid; grid-template-columns:1.6fr .9fr; gap:22px}
+  @media (max-width:980px){ .hero{grid-template-columns:1fr} }
+  .article{
+    background:var(--card); border:1px solid var(--line); border-radius:16px; box-shadow:var(--shadow); overflow:hidden
+  }
+  .hero-img{width:100%; height:300px; object-fit:cover; display:block}
+  @media (max-width:520px){ .hero-img{height:220px} }
+  .pad{padding:22px}
+  .eyebrow{color:var(--brand); font-weight:800; letter-spacing:.3px; text-transform:uppercase; font-size:12px}
+  .title{
+    font-family:Merriweather,Georgia,serif; font-weight:900; line-height:1.15;
+    font-size:34px; margin:8px 0 6px; color:#111
+  }
+  .subtitle{color:var(--muted); margin:0 0 14px}
+  .meta{display:flex; gap:14px; align-items:center; color:#6b768a; font-size:13px; border-top:1px solid var(--line); padding-top:12px}
+  .dot{width:6px; height:6px; border-radius:50%; background:#cdd6e1}
+  /* Article content */
+  .content{padding:0 22px 22px}
+  .content h2{
+    font-family:Merriweather,Georgia,serif; font-weight:900; font-size:22px; margin:22px 0 8px; color:#111
+  }
+  .content p{margin:10px 0; color:#2d3443}
+  .tip{
+    background:var(--accent); border:1px solid #ffd2da; border-radius:12px; padding:12px 14px; margin:14px 0;
+  }
+  .checklist{padding-left:18px; margin:8px 0}
+  .checklist li{margin:6px 0}
+  .quote{
+    border-left:4px solid var(--brand); padding:10px 14px; background:#fff; color:#2d3443; margin:16px 0; border-radius:8px
+  }
+  /* CTA block */
+  .cta{
+    margin-top:18px; padding:16px; border:1px solid var(--line); border-radius:14px; display:grid; gap:8px;
+    background:#fff
+  }
+  .cta h3{margin:0; font-size:18px; color:#111}
+  .cta p{margin:0; color:#4b5565}
+  .cta-btn{
+    display:inline-block; background:var(--brand); color:#fff; text-decoration:none; font-weight:800;
+    padding:12px 16px; border-radius:10px; box-shadow:0 10px 20px rgba(225,25,54,.2); transition:transform .05s ease, background .2s ease
+  }
+  .cta-btn:hover{background:var(--brand-dark)}
+  /* Sidebar */
+  .side{display:grid; gap:18px}
+  .card{
+    background:#fff; border:1px solid var(--line); border-radius:14px; box-shadow:var(--shadow); overflow:hidden
+  }
+  .card h4{margin:0 0 8px; font-size:16px}
+  .card.pad{padding:16px}
+  .author{display:grid; grid-template-columns:56px 1fr; gap:12px; align-items:center}
+  .author img{width:56px; height:56px; border-radius:50%; object-fit:cover}
+  .badge{display:inline-block; background:#fff; border:1px solid var(--line); border-radius:999px; padding:4px 8px; font-size:12px; color:#4b5565}
+  .rel-list{list-style:none; padding:0; margin:0}
+  .rel-list li{border-top:1px solid var(--line); padding:10px 0}
+  .rel-list a{color:#2d3443; text-decoration:none; font-weight:600}
+  .rel-list a:hover{color:#111}
+  .newsletter input{
+    width:100%; padding:10px 12px; border-radius:8px; border:1px solid var(--line); outline:none; font-size:14px
+  }
+  .newsletter small{color:#6b768a}
+  /* Footer */
+  footer{
+    border-top:1px solid var(--line); margin-top:28px; background:#fff
+  }
+  .footwrap{max-width:1100px; margin:0 auto; padding:18px; display:flex; flex-wrap:wrap; gap:12px; align-items:center; color:#6b768a; font-size:13px}
+  .footwrap a{color:#6b768a; text-decoration:none}
+  .footwrap a:hover{color:#111}
 </style>
 </head>
 <body>
+  <!-- HEADER -->
+  <div class="topbar" role="banner" aria-label="Barra superior">
+    <nav class="nav" aria-label="Navegação principal">
+      <div class="brand">
+        <div class="brand-badge" aria-hidden="true">❤</div>
+        <div class="brand-title">RelacionaBlog</div>
+      </div>
+      <div class="nav-links" role="navigation">
+        <a href="#" aria-label="Página inicial">Início</a>
+        <a href="#" aria-label="Dicas de relacionamento">Dicas</a>
+        <a href="#" aria-label="Bem-estar e autoestima">Bem-estar</a>
+        <a href="#" aria-label="Contato">Contato</a>
+      </div>
+    </nav>
+  </div>
 
-<header>
-    <h1>Dicas para Melhorar sua Vida Amorosa</h1>
-</header>
+  <!-- HERO / ARTICLE -->
+  <main class="hero" role="main">
+    <article class="article" itemscope itemtype="https://schema.org/Article">
+      <img class="hero-img" loading="lazy" src="https://images.unsplash.com/photo-1511715289091-2f4b52a3a4d4?q=80&w=1600&auto=format&fit=crop" alt="Casal caminhando ao pôr do sol">
+      <div class="pad">
+        <div class="eyebrow" itemprop="articleSection">Relacionamentos</div>
+        <h1 class="title" itemprop="headline">Dicas para Melhorar sua Vida Amorosa — Guia Completo</h1>
+        <p class="subtitle">Comunicação clara, respeito ao tempo do outro e pequenos rituais criam conexões mais fortes — sem fórmulas mágicas.</p>
 
-<div class="container">
-    <p>Relacionamentos saudáveis exigem dedicação, paciência e comunicação. Muitas vezes, pequenas mudanças na forma como lidamos com nosso parceiro ou parceira podem trazer resultados surpreendentes.</p>
+        <div class="meta">
+          <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+            Por <strong itemprop="name">Mariana Costa</strong>
+          </span>
+          <span class="dot"></span>
+          <time itemprop="datePublished" datetime="2025-08-10">Atualizado hoje</time>
+          <span class="dot"></span>
+          <span>Leitura: 5–7 min</span>
+        </div>
+      </div>
 
-    <h2>1. Comunique-se abertamente</h2>
-    <p>A base de qualquer relação sólida é a comunicação. Compartilhe seus pensamentos e sentimentos de forma clara e respeitosa.</p>
+      <div class="content" itemprop="articleBody">
+        <div class="tip"><strong>Essencial:</strong> não existe perfeição. Relações melhores nascem de constância, honestidade e ajustes de rota.</div>
 
-    <h2>2. Demonstre apreço</h2>
-    <p>Gestos simples como um elogio ou uma mensagem carinhosa podem fortalecer os laços e mostrar que você valoriza a outra pessoa.</p>
+        <h2>1) Converse com intenção (e ouça de verdade)</h2>
+        <p>Falar o que sente é metade do caminho; ouvir com atenção é a outra metade. Evite “acusações” e foque em como você se sente e no que precisa.</p>
+        <ul class="checklist">
+          <li>Use “eu sinto…” em vez de “você faz…”.</li>
+          <li>Repita com suas palavras o que entendeu — mostra cuidado.</li>
+          <li>Combine “horários de alinhamento” semanais rápidos (15 min).</li>
+        </ul>
 
-    <h2>3. Invista em tempo de qualidade</h2>
-    <p>Reserve momentos para estar com seu parceiro(a) sem distrações, aproveitando atividades que ambos gostem.</p>
+        <h2>2) Apreço diário e pequenas gentilezas</h2>
+        <p>Valorize as coisas simples que o outro faz. Um elogio sincero muda o tom do dia e abre espaço para conversas mais profundas.</p>
 
-    <h2>4. Respeite o espaço individual</h2>
-    <p>Manter a individualidade é essencial. Apoie os hobbies e interesses da outra pessoa, mesmo que sejam diferentes dos seus.</p>
+        <h2>3) Tempo de qualidade sem telas</h2>
+        <p>Escolham um momento do dia/semana para fazer algo juntos sem celular: caminhar, cozinhar, jogar. O objetivo é olhar nos olhos e rir juntos.</p>
 
-    <h2>5. Mantenha o romance vivo</h2>
-    <p>Pequenas surpresas e momentos especiais ajudam a manter a chama acesa no relacionamento.</p>
+        <h2>4) Espaço individual não é distância</h2>
+        <p>Hobbies e amigos próprios mantêm sua identidade viva — e isso fortalece a relação. Apoie o tempo do outro; vocês ganham como casal.</p>
 
-    <div class="cta">
-        <a href="SUA_URL_BLACK" target="_blank">Saiba mais</a>
+        <h2>5) Conflitos? Resolva, não acumule</h2>
+        <p>Problemas “debaixo do tapete” viram muralhas. Quando surgir atrito, alinhem expectativas e definam pequenas ações para testar por 1 semana.</p>
+
+        <div class="quote">“Relacionamento saudável é um projeto de duas pessoas que se escolhem todos os dias.”</div>
+
+        <!-- CTA WHITE -->
+        <section class="cta" aria-label="Recurso recomendado">
+          <h3>Quer aprofundar? Veja nosso guia prático</h3>
+          <p>Selecionamos um recurso seguro para você explorar mais ideias e inspirações.</p>
+          <a id="cta" class="cta-btn" href="SUA_URL_BLACK">Saiba mais</a>
+          <small class="muted">Conteúdo informativo. Sem material explícito.</small>
+        </section>
+      </div>
+    </article>
+
+    <!-- SIDEBAR -->
+    <aside class="side" aria-label="Barra lateral">
+      <section class="card pad">
+        <div class="author">
+          <img loading="lazy" src="https://images.unsplash.com/photo-1531123897727-8f129e1688ce?q=80&w=300&auto=format&fit=crop" alt="Foto da autora">
+          <div>
+            <h4>Sobre a autora</h4>
+            <p class="muted">Mariana é redatora e pesquisadora de comportamento, com foco em relações saudáveis e comunicação.</p>
+            <span class="badge">Artigos verificados</span>
+          </div>
+        </div>
+      </section>
+
+      <section class="card pad">
+        <h4>Mais lidos</h4>
+        <ul class="rel-list">
+          <li><a href="#">Como reconstruir confiança (em 3 passos simples)</a></li>
+          <li><a href="#">5 hábitos que aproximam casais ocupados</a></li>
+          <li><a href="#">Comunicação não-violenta no dia a dia</a></li>
+        </ul>
+      </section>
+
+      <section class="card pad newsletter">
+        <h4>Receba novas dicas</h4>
+        <p class="muted">Atualizações ocasionais — só conteúdo útil.</p>
+        <input type="email" placeholder="Seu e-mail (opcional)" aria-label="Seu e-mail">
+        <small>Ao enviar, você concorda com nossa <a href="#">Política de Privacidade</a>.</small>
+      </section>
+    </aside>
+  </main>
+
+  <!-- FOOTER -->
+  <footer role="contentinfo">
+    <div class="footwrap">
+      <span>© <span id="year"></span> RelacionaBlog</span>
+      <span style="flex:1"></span>
+      <a href="#">Política de Privacidade</a>
+      <span class="dot" style="width:4px;height:4px"></span>
+      <a href="#">Termos de Uso</a>
+      <span class="dot" style="width:4px;height:4px"></span>
+      <a href="#">Contato</a>
     </div>
-</div>
+  </footer>
 
-<footer>
-    &copy; 2025 Blog de Relacionamentos. Todos os direitos reservados.
-</footer>
+<script>
+  // Atualiza ano no rodapé
+  document.getElementById('year').textContent = new Date().getFullYear();
 
+  // Acrescenta UTMs automaticamente no CTA (sem cloaking)
+  (function(){
+    try{
+      var cta = document.getElementById('cta');
+      var url = new URL(cta.getAttribute('href'), location.href);
+      var src = (document.referrer||'').toLowerCase().includes('facebook') ? 'facebook'
+              : (document.referrer||'').toLowerCase().includes('taboola')  ? 'taboola'
+              : 'native';
+      url.searchParams.set('utm_source', src);
+      url.searchParams.set('utm_medium', 'white_blog');
+      url.searchParams.set('utm_campaign', 'guia_relacionamentos');
+      cta.href = url.toString();
+    }catch(e){}
+  })();
+</script>
+
+<!-- JSON-LD (SEO opcional) -->
+<script type="application/ld+json">
+{
+  "@context":"https://schema.org",
+  "@type":"Article",
+  "headline":"Dicas para Melhorar sua Vida Amorosa — Guia Completo",
+  "inLanguage":"pt-BR",
+  "author":{"@type":"Person","name":"Mariana Costa"},
+  "publisher":{"@type":"Organization","name":"RelacionaBlog"},
+  "image":"https://images.unsplash.com/photo-1511715289091-2f4b52a3a4d4?q=80&w=1200&auto=format&fit=crop"
+}
+</script>
 </body>
 </html>
