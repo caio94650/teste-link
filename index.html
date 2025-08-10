@@ -1,264 +1,310 @@
 <!DOCTYPE html>
-<html lang="pt-BR">
+<html lang="en">
 <head>
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Compatibility near you</title>
+<title>Find Real Compatibility Near You</title>
+<meta name="theme-color" content="#ff4458">
 <style>
-  :root{--bg:#f7f8fb;--card:#ffffff;--txt:#1b2330;--muted:#708099;--brand:#2563eb;--brand2:#1e40af;--ok:#16a34a}
-  *{box-sizing:border-box}body{margin:0;font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif;background:var(--bg);color:var(--txt)}
-  .wrap{max-width:440px;margin:0 auto;min-height:100dvh;display:flex;align-items:center;justify-content:center;padding:18px}
-  .card{background:var(--card);width:100%;border-radius:20px;box-shadow:0 10px 30px rgba(2,6,23,.08);padding:22px}
-  .brand{display:flex;gap:10px;align-items:center;margin-bottom:8px}
-  .brand-dot{width:10px;height:10px;border-radius:50%;background:var(--brand)}
-  h1{font-size:22px;line-height:1.25;margin:6px 0 12px}
-  p{color:var(--muted);margin:0 0 14px}
-  .progress{height:8px;background:#e9edf3;border-radius:999px;overflow:hidden;margin:10px 0 16px}
-  .bar{height:100%;width:0;background:var(--brand);transition:width .35s ease}
-  .q-img{width:100%;border-radius:14px;margin:10px 0}
-  .grid{display:grid;gap:10px}
+  :root{
+    --bg:#0f1115; --card:#151922; --soft:#1b2130; --txt:#eef2f7; --muted:#99a3b3;
+    --brand:#ff4458; --brand2:#ff2f71; --brand3:#ff7a59; --ok:#28c76f; --warn:#f59e0b;
+    --shadow:0 10px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(160deg,#0d0f14 0%,#121725 100%);color:var(--txt);
+       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
+  .topbar{
+    position:sticky;top:0;z-index:50;
+    background:linear-gradient(90deg,var(--brand) 0%,var(--brand2) 50%,var(--brand3) 100%);
+    color:#fff; box-shadow:var(--shadow);
+  }
+  .topwrap{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:12px 16px}
+  .logo{
+    display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px
+  }
+  .logo-mark{
+    width:28px;height:28px;border-radius:8px;background:#fff1;display:grid;place-items:center;
+    box-shadow:0 6px 18px rgba(0,0,0,.2)
+  }
+  .logo-mark:before{
+    content:"❤";font-size:15px;color:#fff;
+  }
+  .trust{margin-left:auto;display:flex;gap:14px;align-items:center;font-size:12px;opacity:.95}
+  .pill{background:#ffffff22;border:1px solid #ffffff33;color:#fff;border-radius:999px;padding:6px 10px}
+  .wrap{max-width:1040px;margin:28px auto;padding:0 16px}
+  .hero{
+    display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:stretch
+  }
+  @media (max-width:900px){ .hero{grid-template-columns:1fr} }
+  .panel{
+    background:linear-gradient(180deg,#181d29 0%,#151922 100%);
+    border:1px solid #1f2634;border-radius:18px;box-shadow:var(--shadow);
+    overflow:hidden
+  }
+  .panel .head{padding:22px 22px 0}
+  .title{font-size:28px;line-height:1.15;margin:6px 0 8px}
+  .subtitle{color:var(--muted);margin:0 0 14px}
+  .progress{height:10px;background:#202736;border-radius:999px;overflow:hidden;margin:12px 22px}
+  .bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:width .35s ease}
+  .content{padding:0 22px 22px}
+  .q-img{width:100%;height:240px;object-fit:cover;border-radius:14px;margin:14px 0}
+  @media (max-width:420px){ .q-img{height:200px} }
+  .grid{display:grid;gap:12px}
   .grid-2{grid-template-columns:1fr 1fr}
-  .btn{appearance:none;border:0;border-radius:12px;background:#eef3f8;color:var(--txt);padding:14px 12px;font-weight:600;cursor:pointer}
-  .btn:hover{filter:brightness(.98)}
-  .btn.brand{background:var(--brand);color:#fff}
-  .btn.brand:hover{background:var(--brand2)}
-  .btn.ghost{background:#fff;border:1px solid #e6e9f0}
-  .muted{font-size:12px;color:#96a3b6}.center{text-align:center}
-  .pill{display:inline-flex;gap:6px;align-items:center;background:#f1f5fb;color:#3c4a5f;border-radius:999px;padding:6px 10px;font-size:12px;font-weight:600}
-  .loader{display:inline-block;width:10px;height:10px;border:2px solid #c8d2e3;border-top-color:var(--brand);border-radius:50%;animation:spin .9s linear infinite}
+  @media (max-width:520px){ .grid-2{grid-template-columns:1fr} }
+  .btn{
+    appearance:none;border:0;border-radius:14px;background:#222a3a;color:#fff;
+    padding:14px 12px;font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.2);
+    outline:none;transition:transform .08s ease, box-shadow .2s ease, background .2s ease
+  }
+  .btn:hover{transform:translateY(-1px)}
+  .btn:active{transform:translateY(0)}
+  .btn.brand{
+    background:linear-gradient(135deg,var(--brand),var(--brand2));
+    box-shadow:0 12px 24px rgba(255,68,88,.32), inset 0 0 0 1px rgba(255,255,255,.06)
+  }
+  .btn.brand:hover{box-shadow:0 14px 28px rgba(255,68,88,.4)}
+  .btn.ghost{background:#1a2231;border:1px solid #243047}
+  .center{text-align:center}
+  .muted{color:var(--muted);font-size:13px}
+  .scan{
+    display:grid;gap:10px;justify-items:center;padding:8px 0
+  }
+  .loader{width:14px;height:14px;border:2px solid #3a455c;border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
   @keyframes spin{to{transform:rotate(360deg)}}
-  .hidden{display:none}.found{color:var(--ok);font-weight:700}
-  footer{margin-top:14px}a.clean{color:inherit}
+  .found{color:var(--ok);font-weight:800}
+  .right{
+    background:radial-gradient(1200px 600px at 20% 0%,#ff2f7130 0%,transparent 60%), linear-gradient(180deg,#181d29 0%,#151922 100%);
+    border:1px solid #1f2634;border-radius:18px;box-shadow:var(--shadow);overflow:hidden
+  }
+  .right .cover{width:100%;height:180px;background:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop') center/cover}
+  .right .box{padding:18px 18px 20px}
+  .check{display:flex;align-items:center;gap:10px;color:#d9e2ef}
+  .check:before{content:"✓";color:var(--ok);font-weight:900}
+  footer{max-width:1040px;margin:28px auto 40px;padding:0 16px;color:#8e9ab0;font-size:12px;opacity:.9}
+  a.clean{color:#cfe1ff;text-decoration:none;border-bottom:1px dotted #cfe1ff44}
 </style>
 </head>
 <body>
-<div class="wrap">
-  <div class="card" id="app" dir="ltr">
-    <div class="brand"><span class="brand-dot"></span><span class="pill" id="i_badge">Compatibility • Step-by-step</span></div>
-    <h1 id="title">Profiles near <span id="loc-inline">you</span></h1>
-    <p id="subtitle">Answer 3 quick questions to find compatible people in <span id="loc-sub">your area</span>.</p>
-
-    <div class="progress"><div class="bar" id="bar"></div></div>
-
-    <img src="https://i.ibb.co/3sZ9dXx/casal-feliz.jpg" alt="Happy people" class="q-img" id="qimg">
-
-    <!-- STEP 1 -->
-    <section id="step1" class="grid grid-2">
-      <button class="btn" onclick="choose('gender','Male')" id="b_male">I’m Male</button>
-      <button class="btn" onclick="choose('gender','Female')" id="b_female">I’m Female</button>
-    </section>
-
-    <!-- STEP 2 -->
-    <section id="step2" class="grid grid-2 hidden">
-      <button class="btn" onclick="choose('seeking','Men')" id="b_seek_men">Looking for Men</button>
-      <button class="btn" onclick="choose('seeking','Women')" id="b_seek_women">Looking for Women</button>
-      <button class="btn" onclick="choose('seeking','Both')" id="b_seek_both">Both</button>
-      <button class="btn ghost" onclick="choose('seeking','Prefer not to say')" id="b_seek_notsay">Prefer not to say</button>
-    </section>
-
-    <!-- STEP 3 -->
-    <section id="step3" class="grid grid-2 hidden">
-      <button class="btn" onclick="choose('age','18-25')">18–25</button>
-      <button class="btn" onclick="choose('age','26-35')">26–35</button>
-      <button class="btn" onclick="choose('age','36-45')">36–45</button>
-      <button class="btn" onclick="choose('age','46+')">46+</button>
-    </section>
-
-    <!-- STEP 4 -->
-    <section id="step4" class="grid grid-2 hidden">
-      <button class="btn" onclick="choose('goal','Serious relationship')" id="b_goal_serious">Serious relationship</button>
-      <button class="btn" onclick="choose('goal','Casual dates')" id="b_goal_casual">Casual dates</button>
-      <button class="btn" onclick="choose('goal','Friendship')" id="b_goal_friend">Friendship</button>
-      <button class="btn ghost" onclick="choose('goal','Undecided')" id="b_goal_undecided">Undecided</button>
-    </section>
-
-    <!-- LOADING -->
-    <section id="scan" class="hidden center">
-      <p class="pill"><span class="loader"></span> <span id="i_scanning">Analyzing answers…</span></p>
-      <p class="muted" id="i_scan_sub">Filtering nearby profiles based on your preferences in <span id="loc-scan">your area</span>.</p>
-      <img src="https://i.ibb.co/zV1xhvN/chat-sedutor.jpg" alt="Searching" class="q-img">
-      <div id="scanStatus" class="muted">Searching matches… 0%</div>
-    </section>
-
-    <!-- RESULT -->
-    <section id="result" class="hidden">
-      <h2 class="found" id="i_found">✔ We found 7 highly compatible profiles in <span id="loc-result">your area</span></h2>
-      <p id="summary">Based on your answers, we selected people that match you.</p>
-      <ul class="muted" id="bullets" style="padding-left:18px;margin:10px 0 0">
-        <li id="i_b1">Verified profiles with shared interests</li>
-        <li id="i_b2">Discreet and safe chat</li>
-        <li id="i_b3">Free sign-up for new members</li>
-      </ul>
-      <div class="grid" style="margin-top:14px">
-        <a id="cta" class="btn brand center" href="SUA_URL_AQUI">👉 <span id="i_cta">See my compatible profiles</span></a>
-        <button class="btn ghost" onclick="restart()" id="i_restart">Retake quiz</button>
+  <div class="topbar">
+    <div class="topwrap">
+      <div class="logo">
+        <div class="logo-mark"></div>
+        <div id="brandName">HeartMatch</div>
       </div>
-      <p class="muted center" style="margin-top:10px" id="i_slots">Local spots update in real time — may sell out.</p>
+      <div class="trust">
+        <span class="pill" id="i_badge">Compatibility • Step-by-step</span>
+        <span class="pill">18+</span>
+        <span class="pill">Safe & Verified</span>
+      </div>
+    </div>
+  </div>
+
+  <div class="wrap hero">
+    <!-- LEFT: QUIZ -->
+    <section class="panel" id="app" dir="ltr" aria-live="polite">
+      <div class="head">
+        <h1 class="title" id="title">Profiles near <span id="loc-inline">you</span></h1>
+        <p class="subtitle" id="subtitle">Answer 3 quick questions to find compatible people in <span id="loc-sub">your area</span>.</p>
+      </div>
+      <div class="progress"><div class="bar" id="bar"></div></div>
+      <div class="content">
+        <img id="qimg" class="q-img" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1200&auto=format&fit=crop" alt="Happy people">
+
+        <!-- STEP 1 -->
+        <section id="step1" class="grid grid-2" role="group" aria-label="step 1">
+          <button class="btn" onclick="choose('gender','Male')" id="b_male">I’m Male</button>
+          <button class="btn" onclick="choose('gender','Female')" id="b_female">I’m Female</button>
+        </section>
+
+        <!-- STEP 2 -->
+        <section id="step2" class="grid grid-2" role="group" aria-label="step 2" hidden>
+          <button class="btn" onclick="choose('seeking','Men')" id="b_seek_men">Looking for Men</button>
+          <button class="btn" onclick="choose('seeking','Women')" id="b_seek_women">Looking for Women</button>
+          <button class="btn" onclick="choose('seeking','Both')" id="b_seek_both">Both</button>
+          <button class="btn ghost" onclick="choose('seeking','Prefer not to say')" id="b_seek_notsay">Prefer not to say</button>
+        </section>
+
+        <!-- STEP 3 -->
+        <section id="step3" class="grid grid-2" role="group" aria-label="step 3" hidden>
+          <button class="btn" onclick="choose('age','18-25')">18–25</button>
+          <button class="btn" onclick="choose('age','26-35')">26–35</button>
+          <button class="btn" onclick="choose('age','36-45')">36–45</button>
+          <button class="btn" onclick="choose('age','46+')">46+</button>
+        </section>
+
+        <!-- STEP 4 -->
+        <section id="step4" class="grid grid-2" role="group" aria-label="step 4" hidden>
+          <button class="btn" onclick="choose('goal','Serious relationship')" id="b_goal_serious">Serious relationship</button>
+          <button class="btn" onclick="choose('goal','Casual dates')" id="b_goal_casual">Casual dates</button>
+          <button class="btn" onclick="choose('goal','Friendship')" id="b_goal_friend">Friendship</button>
+          <button class="btn ghost" onclick="choose('goal','Undecided')" id="b_goal_undecided">Undecided</button>
+        </section>
+
+        <!-- SCAN -->
+        <section id="scan" class="scan" hidden>
+          <div class="loader" aria-hidden="true"></div>
+          <div class="pill" style="background:#1e2636;color:#d9e2ef;border:1px solid #2b3550" id="i_scanning">Analyzing answers…</div>
+          <p class="muted" id="i_scan_sub">Filtering nearby profiles based on your preferences in <span id="loc-scan">your area</span>.</p>
+        </section>
+
+        <!-- RESULT -->
+        <section id="result" hidden>
+          <h2 class="found" id="i_found">✔ We found 7 highly compatible profiles in <span id="loc-result">your area</span></h2>
+          <p id="summary">Based on your answers, we selected people that match you.</p>
+          <ul class="muted" style="padding-left:18px;margin:10px 0 0">
+            <li id="i_b1">Verified profiles with shared interests</li>
+            <li id="i_b2">Discreet and safe chat</li>
+            <li id="i_b3">Free sign-up for new members</li>
+          </ul>
+          <div class="grid" style="margin-top:16px">
+            <a id="cta" class="btn brand center" href="SUA_URL_AQUI">👉 <span id="i_cta">See my compatible profiles</span></a>
+            <button class="btn ghost" onclick="restart()" id="i_restart">Retake quiz</button>
+          </div>
+          <p class="muted center" style="margin-top:10px" id="i_slots">Local spots update in real time — may sell out.</p>
+        </section>
+      </div>
     </section>
 
-    <footer>
-      <p class="muted" id="i_footer">
-        Informational/entertainment content. No explicit material displayed. By proceeding, you agree to our 
-        <a class="clean" href="#" onclick="alert('Basic terms: informational content, no guarantees of results.');return false;">Terms</a>.
-      </p>
-    </footer>
+    <!-- RIGHT: TRUST / BENEFITS -->
+    <aside class="right" aria-hidden="false">
+      <div class="cover" role="img" aria-label="Happy couple"></div>
+      <div class="box">
+        <h3 style="margin:6px 0 10px">Why people choose HeartMatch</h3>
+        <div class="check" id="r1">Real people. No bots.</div>
+        <div class="check" id="r2">Compatibility by shared interests</div>
+        <div class="check" id="r3">Privacy-first & 18+</div>
+        <div class="check" id="r4">Free to start</div>
+        <p class="muted" style="margin-top:12px" id="r5">Tip: Clean, non-explicit content = ads approval & better CPM on Facebook/Taboola.</p>
+      </div>
+    </aside>
   </div>
-</div>
+
+  <footer>
+    <p id="i_footer">
+      Informational/entertainment content. No explicit material displayed. By proceeding, you agree to our 
+      <a class="clean" href="#" onclick="alert('Basic terms: informational content, no guarantees of results.');return false;">Terms</a>.
+    </p>
+    <p class="muted">© <span id="year"></span> HeartMatch — All rights reserved.</p>
+  </footer>
 
 <script>
-/* ========================
+/* ======================
    STATE
-======================== */
-const state = { gender:null, seeking:null, age:null, goal:null, step:1, total:6, city:null, region:null, country:null, cc:null, lang:'en' };
-const el = s => document.querySelector(s);
-const show = id => el(id).classList.remove('hidden');
-const hide = id => el(id).classList.add('hidden');
+====================== */
+const state = { gender:null, seeking:null, age:null, goal:null, step:1, total:6,
+                city:null, region:null, country:null, cc:null, lang:'en' };
+
+const $ = s => document.querySelector(s);
+const show = s => $(s).hidden = false;
+const hide = s => $(s).hidden = true;
 
 const L = {
-  en:{
-    badge:"Compatibility • Step-by-step",
-    t1:loc=>`Profiles near ${loc||'you'}`,
-    s1:loc=>`Answer 3 quick questions to find compatible people in ${loc||'your area'}.`,
+  en:{brand:"HeartMatch", badge:"Compatibility • Step-by-step",
+    t1:loc=>`Profiles near ${loc||'you'}`, s1:loc=>`Answer 3 quick questions to find compatible people in ${loc||'your area'}.`,
     t2:"Who do you want to meet?", s2:"This helps us show only people you're interested in.",
     t3:"Which age range interests you?", s3:"You can adjust later if you want.",
     t4:"What are you looking for now?", s4:"No judgments — choose what makes sense for you.",
-    scanning:"Analyzing answers…",
-    scanSub:loc=>`Filtering nearby profiles based on your preferences in ${loc||'your area'}.`,
+    scanning:"Analyzing answers…", scanSub:loc=>`Filtering nearby profiles based on your preferences in ${loc||'your area'}.`,
     found:loc=>`✔ We found 7 highly compatible profiles in ${loc||'your area'}`,
-    b1:"Verified profiles with shared interests",
-    b2:"Discreet and safe chat",
-    b3:"Free sign-up for new members",
-    cta:"See my compatible profiles",
-    restart:"Retake quiz",
-    slots:"Local spots update in real time — may sell out",
+    b1:"Verified profiles with shared interests", b2:"Discreet and safe chat", b3:"Free sign-up for new members",
+    cta:"See my compatible profiles", restart:"Retake quiz", slots:"Local spots update in real time — may sell out",
     male:"I’m Male", female:"I’m Female",
     seek_men:"Looking for Men", seek_women:"Looking for Women", seek_both:"Both", seek_notsay:"Prefer not to say",
     goal_serious:"Serious relationship", goal_casual:"Casual dates", goal_friend:"Friendship", goal_und:"Undecided",
+    r1:"Real people. No bots.", r2:"Compatibility by shared interests", r3:"Privacy-first & 18+", r4:"Free to start", r5:"Tip: Clean, non-explicit content = ads approval & better CPM on Facebook/Taboola.",
     footer:"Informational/entertainment content. No explicit material displayed. By proceeding, you agree to our Terms."
   },
-  pt:{
-    badge:"Compatibilidade • Passo a passo",
-    t1:loc=>`Perfis próximos de ${loc||'você'}`,
-    s1:loc=>`Responda 3 perguntas rápidas para encontrar pessoas compatíveis em ${loc||'sua região'}.`,
+  pt:{brand:"HeartMatch", badge:"Compatibilidade • Passo a passo",
+    t1:loc=>`Perfis próximos de ${loc||'você'}`, s1:loc=>`Responda 3 perguntas rápidas para encontrar pessoas compatíveis em ${loc||'sua região'}.`,
     t2:"Quem você quer conhecer?", s2:"Isso ajuda a mostrar apenas pessoas do seu interesse.",
     t3:"Qual faixa etária te interessa?", s3:"Você pode ajustar depois, se quiser.",
     t4:"O que você busca agora?", s4:"Sem julgamentos — escolha o que faz sentido pra você.",
-    scanning:"Analisando respostas…",
-    scanSub:loc=>`Filtrando perfis próximos de ${loc||'você'} com base nas suas preferências.`,
+    scanning:"Analisando respostas…", scanSub:loc=>`Filtrando perfis próximos de ${loc||'você'} com base nas suas preferências.`,
     found:loc=>`✔ Encontramos 7 perfis com alta compatibilidade em ${loc||'sua região'}`,
-    b1:"Perfis verificados e com interesses em comum",
-    b2:"Chat discreto e seguro",
-    b3:"Inscrição gratuita para novos membros",
-    cta:"Ver meus perfis compatíveis",
-    restart:"Refazer quiz",
-    slots:"Vagas locais atualizam em tempo real — pode esgotar",
+    b1:"Perfis verificados e com interesses em comum", b2:"Chat discreto e seguro", b3:"Inscrição gratuita para novos membros",
+    cta:"Ver meus perfis compatíveis", restart:"Refazer quiz", slots:"Vagas locais atualizam em tempo real — pode esgotar",
     male:"Sou Homem", female:"Sou Mulher",
     seek_men:"Procuro Homens", seek_women:"Procuro Mulheres", seek_both:"Ambos", seek_notsay:"Prefiro não dizer",
     goal_serious:"Relacionamento sério", goal_casual:"Encontros casuais", goal_friend:"Amizade", goal_und:"Indefinido",
+    r1:"Pessoas reais. Sem bots.", r2:"Compatibilidade por interesses em comum", r3:"Privacidade em primeiro lugar • 18+", r4:"Comece grátis", r5:"Dica: Conteúdo limpo e não explícito = aprovação e CPM melhor no Facebook/Taboola.",
     footer:"Conteúdo de entretenimento/informativo. Não exibimos material explícito. Ao prosseguir, você concorda com nossos Termos."
   },
-  /* Danish (DK) */
-  da:{
-    badge:"Kompatibilitet • Trin for trin",
-    t1:loc=>`Profiler i nærheden af ${loc||'dig'}`,
-    s1:loc=>`Svar på 3 hurtige spørgsmål for at finde kompatible personer i ${loc||'dit område'}.`,
+  da:{brand:"HeartMatch", badge:"Kompatibilitet • Trin for trin",
+    t1:loc=>`Profiler i nærheden af ${loc||'dig'}`, s1:loc=>`Svar på 3 hurtige spørgsmål for at finde kompatible personer i ${loc||'dit område'}.`,
     t2:"Hvem vil du møde?", s2:"Det hjælper os med kun at vise relevante personer.",
-    t3:"Hvilken aldersgruppe interesserer dig?", s3:"Du kan justere det senere, hvis du vil.",
+    t3:"Hvilken aldersgruppe interesserer dig?", s3:"Du kan justere det senere.",
     t4:"Hvad søger du nu?", s4:"Ingen dom — vælg det, der passer til dig.",
-    scanning:"Analyserer svar…",
-    scanSub:loc=>`Filtrerer nærliggende profiler baseret på dine præferencer i ${loc||'dit område'}.`,
+    scanning:"Analyserer svar…", scanSub:loc=>`Filtrerer nærliggende profiler baseret på dine præferencer i ${loc||'dit område'}.`,
     found:loc=>`✔ Vi fandt 7 meget kompatible profiler i ${loc||'dit område'}`,
-    b1:"Verificerede profiler med fælles interesser",
-    b2:"Diskret og sikker chat",
-    b3:"Gratis tilmelding for nye medlemmer",
-    cta:"Se mine kompatible profiler",
-    restart:"Tag quizzen igen",
-    slots:"Lokale pladser opdateres i realtid — kan blive udsolgt",
+    b1:"Verificerede profiler med fælles interesser", b2:"Diskret og sikker chat", b3:"Gratis tilmelding for nye medlemmer",
+    cta:"Se mine kompatible profiler", restart:"Tag quizzen igen", slots:"Lokale pladser opdateres i realtid — kan blive udsolgt",
     male:"Jeg er mand", female:"Jeg er kvinde",
     seek_men:"Jeg søger mænd", seek_women:"Jeg søger kvinder", seek_both:"Begge", seek_notsay:"Vil ikke sige",
     goal_serious:"Seriøst forhold", goal_casual:"Uforpligtende møder", goal_friend:"Venskab", goal_und:"Uafklaret",
+    r1:"Rigtige mennesker. Ingen bots.", r2:"Kompatibilitet via fælles interesser", r3:"Privatliv først • 18+", r4:"Gratis at starte", r5:"Tip: Rent, ikke-eksplicit indhold = godkendelse og bedre CPM på Facebook/Taboola.",
     footer:"Informations-/underholdningsindhold. Intet eksplicit materiale. Ved at fortsætte accepterer du vores vilkår."
   },
-  /* Norwegian Bokmål (NO) */
-  nb:{
-    badge:"Kompatibilitet • Trinn for trinn",
-    t1:loc=>`Profiler nær ${loc||'deg'}`,
-    s1:loc=>`Svar på 3 raske spørsmål for å finne kompatible personer i ${loc||'området ditt'}.`,
+  nb:{brand:"HeartMatch", badge:"Kompatibilitet • Trinn for trinn",
+    t1:loc=>`Profiler nær ${loc||'deg'}`, s1:loc=>`Svar på 3 raske spørsmål for å finne kompatible personer i ${loc||'området ditt'}.`,
     t2:"Hvem vil du møte?", s2:"Dette hjelper oss å vise bare relevante personer.",
-    t3:"Hvilken aldersgruppe interesserer deg?", s3:"Du kan endre det senere om du vil.",
+    t3:"Hvilken aldersgruppe interesserer deg?", s3:"Du kan justere senere.",
     t4:"Hva ser du etter nå?", s4:"Ingen dømming — velg det som passer for deg.",
-    scanning:"Analyserer svar…",
-    scanSub:loc=>`Filtrerer nærliggende profiler basert på preferansene dine i ${loc||'området ditt'}.`,
+    scanning:"Analyserer svar…", scanSub:loc=>`Filtrerer nærliggende profiler basert på preferansene dine i ${loc||'området ditt'}.`,
     found:loc=>`✔ Vi fant 7 svært kompatible profiler i ${loc||'området ditt'}`,
-    b1:"Verifiserte profiler med felles interesser",
-    b2:"Diskret og trygg chat",
-    b3:"Gratis registrering for nye brukere",
-    cta:"Se mine kompatible profiler",
-    restart:"Ta testen på nytt",
-    slots:"Lokale plasser oppdateres i sanntid — kan bli utsolgt",
+    b1:"Verifiserte profiler med felles interesser", b2:"Diskret og trygg chat", b3:"Gratis registrering for nye brukere",
+    cta:"Se mine kompatible profiler", restart:"Ta testen på nytt", slots:"Lokale plasser oppdateres i sanntid — kan bli utsolgt",
     male:"Jeg er mann", female:"Jeg er kvinne",
     seek_men:"Ser etter menn", seek_women:"Ser etter kvinner", seek_both:"Begge", seek_notsay:"Vil ikke si",
     goal_serious:"Seriøst forhold", goal_casual:"Uforpliktende møter", goal_friend:"Vennskap", goal_und:"Ubestemt",
+    r1:"Ekte mennesker. Ingen roboter.", r2:"Kompatibilitet via felles interesser", r3:"Personvern først • 18+", r4:"Gratis å starte", r5:"Tips: Rent, ikke-eksplicit innhold = godkjenning og bedre CPM på Facebook/Taboola.",
     footer:"Informasjons-/underholdningsinnhold. Ingen eksplisitt materiale. Ved å fortsette godtar du våre vilkår."
   },
-  /* Ukrainian (UA) */
-  uk:{
-    badge:"Сумісність • Крок за кроком",
-    t1:loc=>`Профілі поруч із ${loc||'вами'}`,
-    s1:loc=>`Дайте 3 швидкі відповіді, щоб знайти сумісних людей у ${loc||'вашому районі'}.`,
-    t2:"Кого ви хочете зустріти?", s2:"Це допоможе показувати лише тих, хто вам підходить.",
-    t3:"Яка вікова група вас цікавить?", s3:"За потреби можна змінити пізніше.",
+  uk:{brand:"HeartMatch", badge:"Сумісність • Крок за кроком",
+    t1:loc=>`Профілі поруч із ${loc||'вами'}`, s1:loc=>`Дайте 3 швидкі відповіді, щоб знайти сумісних людей у ${loc||'вашому районі'}.`,
+    t2:"Кого ви хочете зустріти?", s2:"Показуємо лише релевантні профілі.",
+    t3:"Яка вікова група цікавить?", s3:"За потреби можна змінити пізніше.",
     t4:"Що ви шукаєте зараз?", s4:"Без осуду — оберіть те, що вам підходить.",
-    scanning:"Аналізуємо відповіді…",
-    scanSub:loc=>`Фільтруємо найближчі профілі за вашими вподобаннями у ${loc||'вашому районі'}.`,
+    scanning:"Аналізуємо відповіді…", scanSub:loc=>`Фільтруємо профілі поруч відповідно до ваших вподобань у ${loc||'вашому районі'}.`,
     found:loc=>`✔ Ми знайшли 7 дуже сумісних профілів у ${loc||'вашому районі'}`,
-    b1:"Перевірені профілі зі спільними інтересами",
-    b2:"Дискретний і безпечний чат",
-    b3:"Безкоштовна реєстрація для нових користувачів",
-    cta:"Переглянути сумісні профілі",
-    restart:"Пройти тест ще раз",
-    slots:"Локальні слоти оновлюються в реальному часі — можуть закінчитися",
+    b1:"Перевірені профілі зі спільними інтересами", b2:"Дискретний і безпечний чат", b3:"Безкоштовна реєстрація для нових користувачів",
+    cta:"Переглянути сумісні профілі", restart:"Пройти тест ще раз", slots:"Локальні слоти оновлюються в реальному часі — можуть закінчитися",
     male:"Я — чоловік", female:"Я — жінка",
     seek_men:"Шукаю чоловіків", seek_women:"Шукаю жінок", seek_both:"Обох", seek_notsay:"Важко сказати",
     goal_serious:"Серйозні стосунки", goal_casual:"Неформальні побачення", goal_friend:"Дружба", goal_und:"Не визначився",
+    r1:"Справжні люди. Без ботів.", r2:"Сумісність за спільними інтересами", r3:"Конфіденційність понад усе • 18+", r4:"Почніть безкоштовно", r5:"Порада: Чистий, неявний контент = схвалення та кращий CPM у Facebook/Taboola.",
     footer:"Інформаційний/розважальний контент. Без відвертих матеріалів. Продовжуючи, ви погоджуєтесь із нашими умовами."
   }
 };
 
-/* Init */
-detectLocation();
-updateUI();
+/* INIT */
+document.getElementById('year').textContent = new Date().getFullYear();
+detectLocation().then(updateUI);
 
-/* Quiz flow */
+/* QUIZ */
 function choose(key,value){
-  state[key]=value;
-  try{ localStorage.setItem('quizDating', JSON.stringify(state)); }catch(e){}
-  next();
-}
-function next(){
-  if(state.step===1){ state.step=2; }
-  else if(state.step===2){ state.step=3; }
-  else if(state.step===3){ state.step=4; }
+  state[key]=value; try{ localStorage.setItem('quizDating', JSON.stringify(state)); }catch(e){}
+  if(state.step===1) state.step=2;
+  else if(state.step===2) state.step=3;
+  else if(state.step===3) state.step=4;
   else if(state.step===4){ state.step=5; startScan(); }
   updateUI();
 }
 function restart(){
-  state.gender=state.seeking=state.age=state.goal=null;
-  state.step=1; updateUI(true);
+  Object.assign(state,{gender:null,seeking:null,age:null,goal:null,step:1});
+  updateUI(true);
 }
 
 /* UI */
 function updateUI(resetImg){
-  const percent = Math.min(Math.round((state.step-1)/state.total*100), 100);
-  el('#bar').style.width = percent + '%';
-
   const where = prettyLoc();
   const t = L[state.lang] || L.en;
-  setText('#i_badge', t.badge);
-  setText('#title', t.t1(where));
-  setText('#subtitle', t.s1(where));
-  setText('#i_scanning', t.scanning);
-  setText('#i_scan_sub', t.scanSub(where));
+
+  // brand + copy
+  setText('#brandName', t.brand); setText('#i_badge', t.badge);
+  setText('#title', t.t1(where)); setText('#subtitle', t.s1(where));
+  setText('#i_scanning', t.scanning); setText('#i_scan_sub', t.scanSub(where));
   setText('#i_found', t.found(where));
   setText('#i_b1', t.b1); setText('#i_b2', t.b2); setText('#i_b3', t.b3);
   setText('#i_cta', t.cta); setText('#i_restart', t.restart); setText('#i_slots', t.slots);
@@ -271,34 +317,48 @@ function updateUI(resetImg){
   setText('#loc-scan', where || (state.lang==='pt'?'você':'you'));
   setText('#loc-result', where || (state.lang==='pt'?'sua região':'your area'));
 
-  /* step titles text swap for steps 2-4 */
+  // right-box localized bullets
+  setText('#r1', t.r1); setText('#r2', t.r2); setText('#r3', t.r3); setText('#r4', t.r4); setText('#r5', t.r5);
+  setText('#i_footer', t.footer);
+
+  // progress
+  const pct = Math.min(Math.round((state.step-1)/state.total*100),100);
+  $('#bar').style.width = pct + '%';
+
+  // step titles switch
   if(state.step===2){ setText('#title', t.t2); setText('#subtitle', t.s2); }
   if(state.step===3){ setText('#title', t.t3); setText('#subtitle', t.s3); }
   if(state.step===4){ setText('#title', t.t4); setText('#subtitle', t.s4); }
 
   if(resetImg!==false){
-    const img = (state.step>=5) ? 'https://i.ibb.co/zV1xhvN/chat-sedutor.jpg' : 'https://i.ibb.co/3sZ9dXx/casal-feliz.jpg';
-    el('#qimg').src = img;
+    const img = (state.step>=5)
+      ? 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200&auto=format&fit=crop'
+      : 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1200&auto=format&fit=crop';
+    $('#qimg').src = img;
   }
 
-  ['#step1','#step2','#step3','#step4','#scan','#result'].forEach(id=>hide(id));
+  // visibility
+  hide('#step1'); hide('#step2'); hide('#step3'); hide('#step4'); hide('#scan'); hide('#result');
   if(state.step===1) show('#step1');
   if(state.step===2) show('#step2');
   if(state.step===3) show('#step3');
   if(state.step===4) show('#step4');
   if(state.step===5) show('#scan');
   if(state.step===6){
-    const parts = [];
+    // summary line
+    const parts=[];
     if(state.gender) parts.push( state.lang==='pt' ? `Você é ${translateGender(state.gender,'pt')}` : `You are ${state.gender.toLowerCase()}` );
     if(state.seeking && state.seeking!=='Prefer not to say') parts.push( state.lang==='pt' ? `procura ${translateSeeking(state.seeking,'pt')}` : `looking for ${state.seeking.toLowerCase()}` );
     if(state.age) parts.push( (state.lang==='pt' ? 'na faixa ' : 'in the range ') + state.age );
-    if(state.goal && state.goal!=='Undecided') parts.push( (state.lang==='pt' ? 'para ' : 'for ') + (state.goal.toLowerCase()) );
+    if(state.goal && state.goal!=='Undecided') parts.push( (state.lang==='pt' ? 'para ' : 'for ') + state.goal.toLowerCase() );
     if(where) parts.push( (state.lang==='pt' ? 'em ' : 'in ') + where );
-    el('#summary').textContent = parts.length ? parts.join(', ') + '.' : (state.lang==='pt' ? 'Baseado nas suas respostas, selecionamos pessoas que combinam com você.' : 'Based on your answers, we selected people that match you.');
+    setText('#summary', parts.length ? parts.join(', ') + '.' :
+      (state.lang==='pt' ? 'Baseado nas suas respostas, selecionamos pessoas que combinam com você.' :
+                           'Based on your answers, we selected people that match you.')
+    );
 
-    // CTA with UTM + geo + quiz params
-    const base = 'SUA_URL_AQUI';
-    const url = new URL(base, location.href);
+    // CTA URL + params
+    const url = new URL('SUA_URL_AQUI', location.href);
     url.searchParams.set('utm_source', detectSource());
     url.searchParams.set('utm_campaign','quiz_compatibility');
     url.searchParams.set('g', state.gender||'');
@@ -309,96 +369,86 @@ function updateUI(resetImg){
     if(state.region) url.searchParams.set('loc_region', state.region);
     if(state.country) url.searchParams.set('loc_country', state.country);
     if(state.cc) url.searchParams.set('cc', state.cc);
-    el('#cta').href = url.toString();
+    $('#cta').href = url.toString();
 
     show('#result');
   }
 }
+
+/* Scan fake */
 function startScan(){
-  let pct = 0;
-  const status = el('#scanStatus');
+  const status = document.createElement('div');
+  status.className = 'muted';
+  status.id='scanStatus';
+  $('#scan').appendChild(status);
+  let pct = 0; show('#scan');
   const timer = setInterval(()=>{
-    pct += Math.floor(Math.random()*17)+6;
-    if(pct>100) pct=100;
+    pct += Math.floor(Math.random()*17)+6; if(pct>100) pct=100;
     status.textContent = (state.lang==='pt'?'Procurando compatibilidades… ':'Searching matches… ') + pct + '%';
-    if(pct>=100){
-      clearInterval(timer);
-      setTimeout(()=>{ state.step=6; updateUI(false); }, 400);
-    }
+    if(pct>=100){ clearInterval(timer); setTimeout(()=>{ state.step=6; updateUI(false); }, 400); }
   }, 450);
 }
 
 /* Helpers */
-function setText(sel, val){ const n = el(sel); if(n) n.textContent = val; }
+function setText(sel,val){ const n=$(sel); if(n) n.textContent=val; }
 function prettyLoc(){
-  if(state.city && state.region){ return `${state.city}/${state.region}`; }
-  if(state.city && state.country){ return `${state.city}, ${state.country}`; }
-  if(state.region && state.country){ return `${state.region}, ${state.country}`; }
-  if(state.country){ return state.country; }
+  if(state.city && state.region) return `${state.city}/${state.region}`;
+  if(state.city && state.country) return `${state.city}, ${state.country}`;
+  if(state.region && state.country) return `${state.region}, ${state.country}`;
+  if(state.country) return state.country;
   return '';
 }
-function translateGender(v,lang){ if(lang!=='pt') return v; return v==='Male'?'homem': v==='Female'?'mulher': v }
-function translateSeeking(v,lang){ if(lang!=='pt') return v; return v==='Men'?'homens': v==='Women'?'mulheres': v==='Both'?'ambos':'—' }
-function detectSource(){
-  const r = document.referrer.toLowerCase();
+function translateGender(v,lang){ if(lang!=='pt') return v; return v==='Male'?'homem': v==='Female'?'mulher': v; }
+function translateSeeking(v,lang){ if(lang!=='pt') return v; return v==='Men'?'homens': v==='Women'?'mulheres': v==='Both'?'ambos':'—'; }
+function detectSource(){ const r=(document.referrer||'').toLowerCase();
   if(r.includes('facebook')) return 'facebook';
   if(r.includes('taboola')) return 'taboola';
-  return 'native';
-}
+  return 'native'; }
 
-/* ========================
-   GEOLOCATION + AUTOLANG
-======================== */
+/* GEO + AUTOLANG */
 async function detectLocation(){
   try{
-    const d = await fetch('https://ipapi.co/json/').then(r=>r.ok?r.json():Promise.reject());
-    if(d){
-      state.city = d.city || null;
-      state.region = (d.region_code || d.region || '').replace('State of ','') || null;
-      state.country = d.country_name || d.country || null;
-      state.cc = d.country || null; // ISO-CC
+    const a = await fetch('https://ipapi.co/json/').then(r=>r.ok?r.json():Promise.reject());
+    if(a){
+      Object.assign(state,{
+        city:a.city||null,
+        region:(a.region_code||a.region||'').replace('State of ','')||null,
+        country:a.country_name||a.country||null,
+        cc:(a.country||'').toUpperCase()
+      });
       chooseLangByCC(state.cc);
-      updateUI(false);
       return;
     }
   }catch(e){}
   try{
-    const d = await fetch('https://ipwho.is/').then(r=>r.ok?r.json():Promise.reject());
-    if(d && d.success!==false){
-      state.city = d.city || null;
-      state.region = d.region || null;
-      state.country = d.country || null;
-      state.cc = d.country_code || null;
+    const b = await fetch('https://ipwho.is/').then(r=>r.ok?r.json():Promise.reject());
+    if(b && b.success!==false){
+      Object.assign(state,{
+        city:b.city||null, region:b.region||null, country:b.country||null,
+        cc:(b.country_code||'').toUpperCase()
+      });
       chooseLangByCC(state.cc);
-      updateUI(false);
       return;
     }
   }catch(e){}
-  // fallback: keep EN/PT based on <html lang>
-  const docLang = (document.documentElement.getAttribute('lang')||'en').slice(0,2);
-  state.lang = ['pt','da','nb','uk','en'].includes(docLang)?docLang:'en';
-  updateUI(false);
+  const docLang=(document.documentElement.getAttribute('lang')||'en').slice(0,2);
+  state.lang = ['en','pt','da','nb','uk'].includes(docLang)?docLang:'en';
 }
-
 function chooseLangByCC(cc){
-  cc = (cc||'').toUpperCase();
-  if(cc==='DK'){ state.lang='da'; }
-  else if(cc==='NO'){ state.lang='nb'; }
-  else if(cc==='UA'){ state.lang='uk'; }
-  else if(cc==='BR' || cc==='PT'){ state.lang='pt'; }
-  else { state.lang='en'; }
+  if(cc==='DK') state.lang='da';
+  else if(cc==='NO') state.lang='nb';
+  else if(cc==='UA') state.lang='uk';
+  else if(cc==='BR'||cc==='PT') state.lang='pt';
+  else state.lang='en';
 }
 </script>
 
-<!-- Pixel (opcional) 
+<!-- Pixel exemplo (opcional)
 <script>
-  // exemplo de marcação de evento no clique do CTA:
-  document.addEventListener('DOMContentLoaded', ()=>{
-    const cta = document.getElementById('cta');
-    cta.addEventListener('click', ()=>{
-      try{ fbq && fbq('trackCustom','QuizCTA'); }catch(e){}
-    });
-  });
+document.addEventListener('DOMContentLoaded', ()=>{
+  const cta=document.getElementById('cta');
+  cta.addEventListener('click', ()=>{ try{ fbq && fbq('trackCustom','QuizCTA'); }catch(e){} });
+});
 </script>
 -->
 </body>
