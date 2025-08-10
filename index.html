@@ -3,38 +3,31 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Cloaker Dating Zeydoo</title>
+<title>Abrir Link Dating Zeydoo</title>
 <script>
-// Função para detectar país pelo IP
-async function verificarGeo() {
+(async () => {
     try {
-        let resp = await fetch("https://ipapi.co/json/");
-        let dados = await resp.json();
-        let pais = dados.country;
-
-        console.log("Seu país detectado:", pais);
-
-        // Lista de países permitidos dessa oferta
-        let paisesPermitidos = ["CA", "JP", "DE", "FR", "ES", "NO", "SE", "SG"];
-
-        if (paisesPermitidos.includes(pais)) {
-            // GEO permitido → vai para link real
-            window.location.href = "https://sgben.com/link?z=9692996&var={SOURCE_ID}&ymid={CLICK_ID}";
-        } else {
-            // GEO bloqueado → vai para preview
-            window.location.href = "https://sgben.com/prelanding/1120"; 
-        }
-    } catch (e) {
-        console.error("Erro na detecção:", e);
-        // Se der erro, manda pro preview
-        window.location.href = "https://sgben.com/prelanding/1120";
+        // Força User-Agent de Android
+        const androidUA = "Mozilla/5.0 (Linux; Android 10; Pixel 4 XL) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/115.0.0.0 Mobile Safari/537.36";
+        
+        // Usa fetch para abrir com UA forçado
+        const response = await fetch("https://sgben.com/link?z=9692996&var=teste&ymid=123", {
+            method: "GET",
+            headers: {
+                "User-Agent": androidUA
+            }
+        });
+        
+        // Redireciona direto para o link
+        window.location.href = "https://sgben.com/link?z=9692996&var=teste&ymid=123";
+    } catch (err) {
+        console.error(err);
+        document.body.innerHTML = "<h3>Erro ao abrir o link</h3>";
     }
-}
-
-verificarGeo();
+})();
 </script>
 </head>
 <body>
-<p>🔄 Verificando acesso, aguarde...</p>
+<p>🔄 Abrindo link com User-Agent de Android...</p>
 </body>
 </html>
