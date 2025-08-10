@@ -1,251 +1,101 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-<meta charset="utf-8">
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Verifique sua compatibilidade</title>
-<meta name="theme-color" content="#ff5c74">
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Dicas para Melhorar sua Vida Amorosa</title>
 <style>
-  :root{
-    /* Cores no tom da oferta (rosa/coral) */
-    --brand:#ff5c74; --brand2:#ff3f68; --bg:#0f1115; --card:#171b24; --soft:#1e2432;
-    --txt:#f1f5f9; --muted:#9aa4b2; --ok:#22c55e; --warn:#f59e0b; --shadow:0 12px 30px rgba(0,0,0,.35);
-  }
-  *{box-sizing:border-box}
-  body{margin:0;background:linear-gradient(160deg,#0c0f15 0%,#121725 100%);color:var(--txt);
-       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
-  .topbar{position:sticky;top:0;z-index:20;background:#fff1;border-bottom:1px solid #ffffff22;backdrop-filter:blur(8px)}
-  .headwrap{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 16px}
-  .logo{display:flex;align-items:center;gap:8px;font-weight:800}
-  .logo-badge{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand2));
-              display:grid;place-items:center;box-shadow:var(--shadow);color:#fff}
-  .wrap{max-width:980px;margin:26px auto;padding:0 16px}
-  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:20px}
-  @media (max-width:900px){.hero{grid-template-columns:1fr}}
-  .panel{background:linear-gradient(180deg,#1a2030 0%,#161b25 100%);border:1px solid #232a3b;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
-  .banner{height:180px;background:url('https://images.unsplash.com/photo-1511715289091-2f4b52a3a4d4?q=80&w=1400&auto=format&fit=crop') center/cover;filter:brightness(.75)}
-  .title{font-size:26px;margin:14px 18px 4px}
-  .subtitle{color:var(--muted);margin:0 18px 12px}
-  .progress{height:10px;background:#202737;border-radius:999px;overflow:hidden;margin:8px 18px 16px}
-  .bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:width .35s ease}
-  .card{padding:0 18px 18px}
-  .q{background:#0f0f12;border:1px solid #232a3b;background:linear-gradient(180deg,#1c2232 0%,#161b24 100%);
-     padding:16px;border-radius:14px}
-  .q h3{margin:0 0 8px;font-size:18px}
-  .grid{display:grid;gap:10px}
-  .grid-2{grid-template-columns:1fr 1fr}
-  @media (max-width:560px){.grid-2{grid-template-columns:1fr}}
-  .btn{appearance:none;border:0;border-radius:14px;background:#21293a;color:#fff;padding:14px 12px;
-       font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.25);transition:transform .08s ease,box-shadow .2s ease}
-  .btn:hover{transform:translateY(-1px)}
-  .btn.brand{background:linear-gradient(135deg,var(--brand),var(--brand2));box-shadow:0 12px 28px rgba(255,92,116,.32)}
-  .btn.ghost{background:#1a2231;border:1px solid #2a344a}
-  .muted{color:var(--muted);font-size:13px}
-  .center{text-align:center}
-  .scan{display:grid;gap:10px;justify-items:center}
-  .loader{width:14px;height:14px;border:2px solid #3b4660;border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
-  @keyframes spin{to{transform:rotate(360deg)}}
-  .found{color:var(--ok);font-weight:800}
-  .right{background:linear-gradient(180deg,#1b2030 0%,#171c28 100%);border:1px solid #232a3b;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
-  .right .cover{height:180px;background:url('https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?q=80&w=1400&auto=format&fit=crop') center/cover;filter:brightness(.75)}
-  .right .box{padding:16px}
-  .check{display:flex;align-items:center;gap:10px;margin:6px 0}
-  .dot{width:8px;height:8px;border-radius:50%;background:var(--brand)}
-  footer{max-width:980px;margin:26px auto 40px;padding:0 16px;color:#8e9ab0;font-size:12px}
-  a.clean{color:#ffd7de;text-decoration:none;border-bottom:1px dotted #ffd7de55}
+    body {
+        font-family: Arial, sans-serif;
+        background: #ffffff;
+        margin: 0;
+        padding: 0;
+        color: #333;
+        line-height: 1.6;
+    }
+    header {
+        background: #fff;
+        padding: 20px;
+        text-align: center;
+        border-bottom: 3px solid #eee;
+    }
+    header h1 {
+        color: red;
+        font-size: 28px;
+        margin: 0;
+    }
+    .container {
+        max-width: 800px;
+        margin: auto;
+        padding: 20px;
+    }
+    h2 {
+        color: #444;
+        margin-top: 30px;
+    }
+    p {
+        margin-bottom: 15px;
+    }
+    .cta {
+        text-align: center;
+        margin-top: 30px;
+    }
+    .cta a {
+        display: inline-block;
+        background: red;
+        color: white;
+        padding: 14px 28px;
+        border-radius: 5px;
+        text-decoration: none;
+        font-size: 18px;
+        font-weight: bold;
+        transition: background 0.3s ease;
+    }
+    .cta a:hover {
+        background: darkred;
+    }
+    footer {
+        background: #f4f4f4;
+        padding: 15px;
+        text-align: center;
+        font-size: 14px;
+        color: #666;
+        margin-top: 40px;
+    }
 </style>
 </head>
 <body>
-  <div class="topbar">
-    <div class="headwrap">
-      <div class="logo"><div class="logo-badge">❤</div><div>Dates • Pre-check</div></div>
-      <div style="margin-left:auto" class="muted">Aprovado • Conteúdo sem nudez</div>
+
+<header>
+    <h1>Dicas para Melhorar sua Vida Amorosa</h1>
+</header>
+
+<div class="container">
+    <p>Relacionamentos saudáveis exigem dedicação, paciência e comunicação. Muitas vezes, pequenas mudanças na forma como lidamos com nosso parceiro ou parceira podem trazer resultados surpreendentes.</p>
+
+    <h2>1. Comunique-se abertamente</h2>
+    <p>A base de qualquer relação sólida é a comunicação. Compartilhe seus pensamentos e sentimentos de forma clara e respeitosa.</p>
+
+    <h2>2. Demonstre apreço</h2>
+    <p>Gestos simples como um elogio ou uma mensagem carinhosa podem fortalecer os laços e mostrar que você valoriza a outra pessoa.</p>
+
+    <h2>3. Invista em tempo de qualidade</h2>
+    <p>Reserve momentos para estar com seu parceiro(a) sem distrações, aproveitando atividades que ambos gostem.</p>
+
+    <h2>4. Respeite o espaço individual</h2>
+    <p>Manter a individualidade é essencial. Apoie os hobbies e interesses da outra pessoa, mesmo que sejam diferentes dos seus.</p>
+
+    <h2>5. Mantenha o romance vivo</h2>
+    <p>Pequenas surpresas e momentos especiais ajudam a manter a chama acesa no relacionamento.</p>
+
+    <div class="cta">
+        <a href="SUA_URL_BLACK" target="_blank">Saiba mais</a>
     </div>
-  </div>
+</div>
 
-  <div class="wrap hero">
-    <!-- QUIZ -->
-    <section class="panel" id="app" aria-live="polite">
-      <div class="banner" role="img" aria-label="Casal ao fundo"></div>
-      <h1 class="title">Quase lá! Vamos preparar seus resultados</h1>
-      <p class="subtitle">Responda 3 passos rápidos. Não pedimos idade, gênero ou cidade aqui.</p>
+<footer>
+    &copy; 2025 Blog de Relacionamentos. Todos os direitos reservados.
+</footer>
 
-      <div class="progress"><div class="bar" id="bar"></div></div>
-
-      <div class="card">
-        <!-- PASSO 1 – Confirmação 18+ (não pede idade) -->
-        <section id="step1" class="q">
-          <h3>Você confirma que tem 18 anos ou mais?</h3>
-          <div class="grid grid-2">
-            <button class="btn brand" data-next="2" data-k="age_ok" data-v="yes">Sim, tenho 18+</button>
-            <button class="btn ghost" data-next="deny" data-k="age_ok" data-v="no">Não</button>
-          </div>
-          <p class="muted">Necessário para mostrar perfis.</p>
-        </section>
-
-        <!-- PASSO 2 – Privacidade preferida -->
-        <section id="step2" class="q" hidden>
-          <h3>Como prefere aparecer para outras pessoas?</h3>
-          <div class="grid grid-2">
-            <button class="btn" data-next="3" data-k="privacy" data-v="first_name_only">Apenas primeiro nome</button>
-            <button class="btn" data-next="3" data-k="privacy" data-v="name_and_photo">Nome + foto</button>
-            <button class="btn ghost" data-next="3" data-k="privacy" data-v="decide_later">Decido depois</button>
-          </div>
-        </section>
-
-        <!-- PASSO 3 – Distância (não pede cidade) -->
-        <section id="step3" class="q" hidden>
-          <h3>Qual raio você aceita para ver novas conexões?</h3>
-          <div class="grid grid-2">
-            <button class="btn" data-next="4" data-k="radius" data-v="same_city">Somente na minha cidade</button>
-            <button class="btn" data-next="4" data-k="radius" data-v="15km">Até 15 km</button>
-            <button class="btn" data-next="4" data-k="radius" data-v="50km">Até 50 km</button>
-            <button class="btn ghost" data-next="4" data-k="radius" data-v="anywhere">Qualquer lugar</button>
-          </div>
-        </section>
-
-        <!-- PASSO 4 – Disponibilidade -->
-        <section id="step4" class="q" hidden>
-          <h3>Quando pretende começar a conversar?</h3>
-          <div class="grid grid-2">
-            <button class="btn" data-next="scan" data-k="start" data-v="today">Hoje</button>
-            <button class="btn" data-next="scan" data-k="start" data-v="this_weekend">Neste fim de semana</button>
-            <button class="btn" data-next="scan" data-k="start" data-v="this_week">Esta semana</button>
-            <button class="btn ghost" data-next="scan" data-k="start" data-v="no_rush">Sem pressa</button>
-          </div>
-        </section>
-
-        <!-- LOADING / SCAN -->
-        <section id="scan" class="q scan" hidden>
-          <div class="loader"></div>
-          <div class="muted" id="scanText">Buscando perfis perto de você… 0%</div>
-        </section>
-
-        <!-- RESULTADO -->
-        <section id="result" class="q" hidden>
-          <h3 class="found" id="foundTitle">✔ Pronto! Encontramos perfis próximos</h3>
-          <p id="summary">Preferência de privacidade: — • Raio: — • Início: —</p>
-          <div class="grid" style="margin-top:12px">
-            <a id="cta" class="btn brand center" href="SUA_URL_AQUI">👉 Ver perfis agora</a>
-            <button class="btn ghost" id="restart">Refazer pré-check</button>
-          </div>
-          <p class="muted center" style="margin-top:8px">Resultados atualizados em tempo real. Pode esgotar.</p>
-        </section>
-
-        <!-- NEGADO 18- -->
-        <section id="deny" class="q center" hidden>
-          <h3>Conteúdo restrito a maiores de 18 anos.</h3>
-          <p class="muted">Quando completar 18 anos, volte para continuar.</p>
-        </section>
-      </div>
-    </section>
-
-    <!-- LADO DIREITO (prova/benefícios) -->
-    <aside class="right">
-      <div class="cover"></div>
-      <div class="box">
-        <div class="check"><span class="dot"></span> Perfis verificados</div>
-        <div class="check"><span class="dot"></span> Sem bots • Privacidade primeiro</div>
-        <div class="check"><span class="dot"></span> Acesso gratuito para começar</div>
-        <p class="muted" style="margin-top:8px">Dica: mantenha linguagem neutra e sem nudez para melhor aprovação no Facebook/Taboola.</p>
-      </div>
-    </aside>
-  </div>
-
-  <footer>
-    <p class="muted">Informativo/entretenimento. Não exibimos conteúdo explícito. Ao continuar, você concorda com
-      <a class="clean" href="#" onclick="alert('Termos simples: conteúdo informativo, sem garantias de resultado.');return false;">nossos termos</a>.
-    </p>
-  </footer>
-
-<script>
-const state={step:1,total:6,age_ok:null,privacy:null,radius:null,start:null,city:null,region:null,country:null,cc:null};
-const $=s=>document.querySelector(s);
-document.querySelectorAll('.btn[data-next]').forEach(b=>b.addEventListener('click',()=>advance(b)));
-$('#restart').addEventListener('click',()=>{Object.assign(state,{step:1,age_ok:null,privacy:null,radius:null,start:null}); render();});
-detectLocation().then(render);
-
-function advance(btn){
-  const k=btn.dataset.k, v=btn.dataset.v, next=btn.dataset.next;
-  if(k) state[k]=v;
-  if(next==='deny'){ show('#deny'); hideAll('#step1','#step2','#step3','#step4','#scan','#result'); updateBar(1); return; }
-  if(next==='2') state.step=2;
-  else if(next==='3') state.step=3;
-  else if(next==='4') state.step=4;
-  else if(next==='scan'){ state.step=5; startScan(); }
-  render();
-}
-
-function render(){
-  updateBar(state.step);
-  hideAll('#step1','#step2','#step3','#step4','#scan','#result','#deny');
-  if(state.step===1) show('#step1');
-  if(state.step===2) show('#step2');
-  if(state.step===3) show('#step3');
-  if(state.step===4) show('#step4');
-  if(state.step===5) show('#scan');
-  if(state.step===6){
-    // título com cidade
-    const where = prettyLoc() || 'sua região';
-    $('#foundTitle').textContent = `✔ Pronto! Encontramos perfis em ${where}`;
-    // resumo
-    $('#summary').textContent = `Privacidade: ${label('privacy')} • Raio: ${label('radius')} • Início: ${label('start')}`;
-    // CTA + UTMs
-    const url=new URL('SUA_URL_AQUI', location.href);
-    url.searchParams.set('utm_source', detectSource());
-    url.searchParams.set('utm_campaign','pressel_precheck');
-    url.searchParams.set('privacy', state.privacy||'');
-    url.searchParams.set('radius', state.radius||'');
-    url.searchParams.set('start', state.start||'');
-    if(state.city) url.searchParams.set('loc_city', state.city);
-    if(state.region) url.searchParams.set('loc_region', state.region);
-    if(state.country) url.searchParams.set('loc_country', state.country);
-    if(state.cc) url.searchParams.set('cc', state.cc);
-    $('#cta').href=url.toString();
-    show('#result');
-  }
-}
-
-function startScan(){
-  let pct=0; const t=$('#scanText'); t.textContent=`Buscando perfis perto de ${prettyLoc()||'você'}… ${pct}%`;
-  const timer=setInterval(()=>{
-    pct+=Math.floor(Math.random()*17)+6; if(pct>100)pct=100;
-    t.textContent=`Buscando perfis perto de ${prettyLoc()||'você'}… ${pct}%`;
-    if(pct>=100){ clearInterval(timer); state.step=6; render(); }
-  },450);
-}
-
-function updateBar(step){ $('#bar').style.width = Math.min(Math.round((step-1)/state.total*100),100)+'%'; }
-function hideAll(...ids){ ids.forEach(i=>$(i).hidden=true); }
-function show(id){ $(id).hidden=false; }
-
-function label(k){
-  const map={
-    privacy:{first_name_only:'Primeiro nome',name_and_photo:'Nome + foto',decide_later:'Decidir depois'},
-    radius:{same_city:'Mesma cidade', '15km':'Até 15 km', '50km':'Até 50 km', anywhere:'Qualquer lugar'},
-    start:{today:'Hoje',this_weekend:'Neste fim de semana',this_week:'Esta semana',no_rush:'Sem pressa'}
-  };
-  return (map[k] && map[k][state[k]]) || '—';
-}
-
-function detectSource(){ const r=(document.referrer||'').toLowerCase();
-  if(r.includes('facebook')) return 'facebook';
-  if(r.includes('taboola')) return 'taboola';
-  return 'native';
-}
-
-/* GEO por IP (apenas exibição e UTM) */
-async function detectLocation(){
-  try{
-    const a=await fetch('https://ipapi.co/json/').then(r=>r.ok?r.json():Promise.reject());
-    if(a){ state.city=a.city||null; state.region=(a.region_code||a.region||'').replace('State of ','')||null; state.country=a.country_name||a.country||null; state.cc=(a.country||'').toUpperCase(); return; }
-  }catch(e){}
-  try{
-    const b=await fetch('https://ipwho.is/').then(r=>r.ok?r.json():Promise.reject());
-    if(b && b.success!==false){ state.city=b.city||null; state.region=b.region||null; state.country=b.country||null; state.cc=(b.country_code||'').toUpperCase(); }
-  }catch(e){}
-}
-function prettyLoc(){ if(state.city && state.region) return `${state.city}/${state.region}`; if(state.city && state.country) return `${state.city}, ${state.country}`; if(state.region && state.country) return `${state.region}, ${state.country}`; if(state.country) return state.country; return ''; }
-</script>
 </body>
 </html>
