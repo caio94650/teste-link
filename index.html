@@ -1,266 +1,251 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-BR">
 <head>
-<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
-<title>Find Real Compatibility Near You</title>
-<meta name="theme-color" content="#ff4458">
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Verifique sua compatibilidade</title>
+<meta name="theme-color" content="#ff5c74">
 <style>
-  :root{--bg:#0f1115;--card:#151922;--soft:#1b2130;--txt:#eef2f7;--muted:#99a3b3;--brand:#ff4458;--brand2:#ff2f71;--brand3:#ff7a59;--ok:#28c76f;--shadow:0 10px 30px rgba(0,0,0,.35)}
-  *{box-sizing:border-box}body{margin:0;background:linear-gradient(160deg,#0d0f14 0%,#121725 100%);color:var(--txt);font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,"Noto Sans",sans-serif}
-  .topbar{position:sticky;top:0;z-index:50;background:linear-gradient(90deg,var(--brand) 0%,var(--brand2) 50%,var(--brand3) 100%);color:#fff;box-shadow:var(--shadow)}
-  .topwrap{max-width:1040px;margin:0 auto;display:flex;align-items:center;gap:14px;padding:12px 16px}
-  .logo{display:flex;align-items:center;gap:10px;font-weight:800;letter-spacing:.3px}
-  .logo-mark{width:28px;height:28px;border-radius:8px;background:#fff1;display:grid;place-items:center;box-shadow:0 6px 18px rgba(0,0,0,.2)}
-  .logo-mark:before{content:"❤";font-size:15px;color:#fff}
-  .trust{margin-left:auto;display:flex;gap:14px;align-items:center;font-size:12px;opacity:.95}
-  .pill{background:#ffffff22;border:1px solid #ffffff33;color:#fff;border-radius:999px;padding:6px 10px}
-  .wrap{max-width:1040px;margin:28px auto;padding:0 16px}
-  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:20px;align-items:stretch}
+  :root{
+    /* Cores no tom da oferta (rosa/coral) */
+    --brand:#ff5c74; --brand2:#ff3f68; --bg:#0f1115; --card:#171b24; --soft:#1e2432;
+    --txt:#f1f5f9; --muted:#9aa4b2; --ok:#22c55e; --warn:#f59e0b; --shadow:0 12px 30px rgba(0,0,0,.35);
+  }
+  *{box-sizing:border-box}
+  body{margin:0;background:linear-gradient(160deg,#0c0f15 0%,#121725 100%);color:var(--txt);
+       font-family:Inter,system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif}
+  .topbar{position:sticky;top:0;z-index:20;background:#fff1;border-bottom:1px solid #ffffff22;backdrop-filter:blur(8px)}
+  .headwrap{max-width:980px;margin:0 auto;display:flex;align-items:center;gap:12px;padding:10px 16px}
+  .logo{display:flex;align-items:center;gap:8px;font-weight:800}
+  .logo-badge{width:28px;height:28px;border-radius:8px;background:linear-gradient(135deg,var(--brand),var(--brand2));
+              display:grid;place-items:center;box-shadow:var(--shadow);color:#fff}
+  .wrap{max-width:980px;margin:26px auto;padding:0 16px}
+  .hero{display:grid;grid-template-columns:1.15fr .85fr;gap:20px}
   @media (max-width:900px){.hero{grid-template-columns:1fr}}
-  .panel{background:linear-gradient(180deg,#181d29 0%,#151922 100%);border:1px solid #1f2634;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
-  .head{padding:22px 22px 0}.title{font-size:28px;line-height:1.15;margin:6px 0 8px}.subtitle{color:var(--muted);margin:0 0 14px}
-  .progress{height:10px;background:#202736;border-radius:999px;overflow:hidden;margin:12px 22px}.bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:width .35s ease}
-  .content{padding:0 22px 22px}.q-img{width:100%;height:240px;object-fit:cover;border-radius:14px;margin:14px 0}
-  @media (max-width:420px){.q-img{height:200px}}
-  .grid{display:grid;gap:12px}.grid-2{grid-template-columns:1fr 1fr}
-  @media (max-width:520px){.grid-2{grid-template-columns:1fr}}
-  .btn{appearance:none;border:0;border-radius:14px;background:#222a3a;color:#fff;padding:14px 12px;font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.2);outline:none;transition:transform .08s ease,box-shadow .2s ease,background .2s ease}
-  .btn:hover{transform:translateY(-1px)}.btn:active{transform:translateY(0)}
-  .btn.brand{background:linear-gradient(135deg,var(--brand),var(--brand2));box-shadow:0 12px 24px rgba(255,68,88,.32),inset 0 0 0 1px rgba(255,255,255,.06)}
-  .btn.brand:hover{box-shadow:0 14px 28px rgba(255,68,88,.4)}
-  .btn.ghost{background:#1a2231;border:1px solid #243047}
-  .center{text-align:center}.muted{color:var(--muted);font-size:13px}
-  .scan{display:grid;gap:10px;justify-items:center;padding:8px 0}
-  .loader{width:14px;height:14px;border:2px solid #3a455c;border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}@keyframes spin{to{transform:rotate(360deg)}}
+  .panel{background:linear-gradient(180deg,#1a2030 0%,#161b25 100%);border:1px solid #232a3b;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  .banner{height:180px;background:url('https://images.unsplash.com/photo-1511715289091-2f4b52a3a4d4?q=80&w=1400&auto=format&fit=crop') center/cover;filter:brightness(.75)}
+  .title{font-size:26px;margin:14px 18px 4px}
+  .subtitle{color:var(--muted);margin:0 18px 12px}
+  .progress{height:10px;background:#202737;border-radius:999px;overflow:hidden;margin:8px 18px 16px}
+  .bar{height:100%;width:0;background:linear-gradient(90deg,var(--brand),var(--brand2));transition:width .35s ease}
+  .card{padding:0 18px 18px}
+  .q{background:#0f0f12;border:1px solid #232a3b;background:linear-gradient(180deg,#1c2232 0%,#161b24 100%);
+     padding:16px;border-radius:14px}
+  .q h3{margin:0 0 8px;font-size:18px}
+  .grid{display:grid;gap:10px}
+  .grid-2{grid-template-columns:1fr 1fr}
+  @media (max-width:560px){.grid-2{grid-template-columns:1fr}}
+  .btn{appearance:none;border:0;border-radius:14px;background:#21293a;color:#fff;padding:14px 12px;
+       font-weight:700;cursor:pointer;box-shadow:0 8px 18px rgba(0,0,0,.25);transition:transform .08s ease,box-shadow .2s ease}
+  .btn:hover{transform:translateY(-1px)}
+  .btn.brand{background:linear-gradient(135deg,var(--brand),var(--brand2));box-shadow:0 12px 28px rgba(255,92,116,.32)}
+  .btn.ghost{background:#1a2231;border:1px solid #2a344a}
+  .muted{color:var(--muted);font-size:13px}
+  .center{text-align:center}
+  .scan{display:grid;gap:10px;justify-items:center}
+  .loader{width:14px;height:14px;border:2px solid #3b4660;border-top-color:#fff;border-radius:50%;animation:spin .8s linear infinite}
+  @keyframes spin{to{transform:rotate(360deg)}}
   .found{color:var(--ok);font-weight:800}
-  .right{background:radial-gradient(1200px 600px at 20% 0%,#ff2f7130 0%,transparent 60%),linear-gradient(180deg,#181d29 0%,#151922 100%);border:1px solid #1f2634;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
-  .cover{width:100%;height:180px;background:url('https://images.unsplash.com/photo-1524504388940-b1c1722653e1?q=80&w=1200&auto=format&fit=crop') center/cover}
-  .box{padding:18px 18px 20px}.check{display:flex;align-items:center;gap:10px;color:#d9e2ef}.check:before{content:"✓";color:var(--ok);font-weight:900}
-  footer{max-width:1040px;margin:28px auto 40px;padding:0 16px;color:#8e9ab0;font-size:12px;opacity:.9}
-  a.clean{color:#cfe1ff;text-decoration:none;border-bottom:1px dotted #cfe1ff44}
+  .right{background:linear-gradient(180deg,#1b2030 0%,#171c28 100%);border:1px solid #232a3b;border-radius:18px;box-shadow:var(--shadow);overflow:hidden}
+  .right .cover{height:180px;background:url('https://images.unsplash.com/photo-1507874457470-272b3c8d8ee2?q=80&w=1400&auto=format&fit=crop') center/cover;filter:brightness(.75)}
+  .right .box{padding:16px}
+  .check{display:flex;align-items:center;gap:10px;margin:6px 0}
+  .dot{width:8px;height:8px;border-radius:50%;background:var(--brand)}
+  footer{max-width:980px;margin:26px auto 40px;padding:0 16px;color:#8e9ab0;font-size:12px}
+  a.clean{color:#ffd7de;text-decoration:none;border-bottom:1px dotted #ffd7de55}
 </style>
 </head>
 <body>
   <div class="topbar">
-    <div class="topwrap">
-      <div class="logo"><div class="logo-mark"></div><div id="brandName">HeartMatch</div></div>
-      <div class="trust"><span class="pill" id="i_badge">Compatibility • Step-by-step</span><span class="pill">18+</span><span class="pill">Safe & Verified</span></div>
+    <div class="headwrap">
+      <div class="logo"><div class="logo-badge">❤</div><div>Dates • Pre-check</div></div>
+      <div style="margin-left:auto" class="muted">Aprovado • Conteúdo sem nudez</div>
     </div>
   </div>
 
   <div class="wrap hero">
-    <!-- LEFT: QUIZ -->
-    <section class="panel" id="app" dir="ltr" aria-live="polite">
-      <div class="head">
-        <h1 class="title" id="title">Profiles near <span id="loc-inline">you</span></h1>
-        <p class="subtitle" id="subtitle">Answer 3 quick questions to find compatible people in <span id="loc-sub">your area</span>.</p>
-      </div>
+    <!-- QUIZ -->
+    <section class="panel" id="app" aria-live="polite">
+      <div class="banner" role="img" aria-label="Casal ao fundo"></div>
+      <h1 class="title">Quase lá! Vamos preparar seus resultados</h1>
+      <p class="subtitle">Responda 3 passos rápidos. Não pedimos idade, gênero ou cidade aqui.</p>
+
       <div class="progress"><div class="bar" id="bar"></div></div>
-      <div class="content">
-        <img id="qimg" class="q-img" src="https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1200&auto=format&fit=crop" alt="Happy people">
 
-        <!-- STEP 1 -->
-        <section id="step1" class="grid grid-2" role="group" aria-label="step 1">
-          <button class="btn" data-action="choose" data-key="gender" data-value="Male"   id="b_male">I’m Male</button>
-          <button class="btn" data-action="choose" data-key="gender" data-value="Female" id="b_female">I’m Female</button>
-        </section>
-
-        <!-- STEP 2 -->
-        <section id="step2" class="grid grid-2" role="group" aria-label="step 2" hidden>
-          <button class="btn" data-action="choose" data-key="seeking" data-value="Men"    id="b_seek_men">Looking for Men</button>
-          <button class="btn" data-action="choose" data-key="seeking" data-value="Women"  id="b_seek_women">Looking for Women</button>
-          <button class="btn" data-action="choose" data-key="seeking" data-value="Both"   id="b_seek_both">Both</button>
-          <button class="btn ghost" data-action="choose" data-key="seeking" data-value="Prefer not to say" id="b_seek_notsay">Prefer not to say</button>
-        </section>
-
-        <!-- STEP 3 -->
-        <section id="step3" class="grid grid-2" role="group" aria-label="step 3" hidden>
-          <button class="btn" data-action="choose" data-key="age" data-value="18-25">18–25</button>
-          <button class="btn" data-action="choose" data-key="age" data-value="26-35">26–35</button>
-          <button class="btn" data-action="choose" data-key="age" data-value="36-45">36–45</button>
-          <button class="btn" data-action="choose" data-key="age" data-value="46+">46+</button>
-        </section>
-
-        <!-- STEP 4 -->
-        <section id="step4" class="grid grid-2" role="group" aria-label="step 4" hidden>
-          <button class="btn" data-action="choose" data-key="goal" data-value="Serious relationship" id="b_goal_serious">Serious relationship</button>
-          <button class="btn" data-action="choose" data-key="goal" data-value="Casual dates"          id="b_goal_casual">Casual dates</button>
-          <button class="btn" data-action="choose" data-key="goal" data-value="Friendship"            id="b_goal_friend">Friendship</button>
-          <button class="btn ghost" data-action="choose" data-key="goal" data-value="Undecided"       id="b_goal_undecided">Undecided</button>
-        </section>
-
-        <!-- SCAN -->
-        <section id="scan" class="scan" hidden>
-          <div class="loader" aria-hidden="true"></div>
-          <div class="pill" style="background:#1e2636;color:#d9e2ef;border:1px solid #2b3550" id="i_scanning">Analyzing answers…</div>
-          <p class="muted" id="i_scan_sub">Filtering nearby profiles based on your preferences in <span id="loc-scan">your area</span>.</p>
-          <div id="scanStatus" class="muted">Searching matches… 0%</div>
-        </section>
-
-        <!-- RESULT -->
-        <section id="result" hidden>
-          <h2 class="found" id="i_found">✔ We found 7 highly compatible profiles in <span id="loc-result">your area</span></h2>
-          <p id="summary">Based on your answers, we selected people that match you.</p>
-          <ul class="muted" style="padding-left:18px;margin:10px 0 0">
-            <li id="i_b1">Verified profiles with shared interests</li>
-            <li id="i_b2">Discreet and safe chat</li>
-            <li id="i_b3">Free sign-up for new members</li>
-          </ul>
-          <div class="grid" style="margin-top:16px">
-            <a id="cta" class="btn brand center" href="SUA_URL_AQUI">👉 <span id="i_cta">See my compatible profiles</span></a>
-            <button class="btn ghost" id="restartBtn">Retake quiz</button>
+      <div class="card">
+        <!-- PASSO 1 – Confirmação 18+ (não pede idade) -->
+        <section id="step1" class="q">
+          <h3>Você confirma que tem 18 anos ou mais?</h3>
+          <div class="grid grid-2">
+            <button class="btn brand" data-next="2" data-k="age_ok" data-v="yes">Sim, tenho 18+</button>
+            <button class="btn ghost" data-next="deny" data-k="age_ok" data-v="no">Não</button>
           </div>
-          <p class="muted center" style="margin-top:10px" id="i_slots">Local spots update in real time — may sell out.</p>
+          <p class="muted">Necessário para mostrar perfis.</p>
+        </section>
+
+        <!-- PASSO 2 – Privacidade preferida -->
+        <section id="step2" class="q" hidden>
+          <h3>Como prefere aparecer para outras pessoas?</h3>
+          <div class="grid grid-2">
+            <button class="btn" data-next="3" data-k="privacy" data-v="first_name_only">Apenas primeiro nome</button>
+            <button class="btn" data-next="3" data-k="privacy" data-v="name_and_photo">Nome + foto</button>
+            <button class="btn ghost" data-next="3" data-k="privacy" data-v="decide_later">Decido depois</button>
+          </div>
+        </section>
+
+        <!-- PASSO 3 – Distância (não pede cidade) -->
+        <section id="step3" class="q" hidden>
+          <h3>Qual raio você aceita para ver novas conexões?</h3>
+          <div class="grid grid-2">
+            <button class="btn" data-next="4" data-k="radius" data-v="same_city">Somente na minha cidade</button>
+            <button class="btn" data-next="4" data-k="radius" data-v="15km">Até 15 km</button>
+            <button class="btn" data-next="4" data-k="radius" data-v="50km">Até 50 km</button>
+            <button class="btn ghost" data-next="4" data-k="radius" data-v="anywhere">Qualquer lugar</button>
+          </div>
+        </section>
+
+        <!-- PASSO 4 – Disponibilidade -->
+        <section id="step4" class="q" hidden>
+          <h3>Quando pretende começar a conversar?</h3>
+          <div class="grid grid-2">
+            <button class="btn" data-next="scan" data-k="start" data-v="today">Hoje</button>
+            <button class="btn" data-next="scan" data-k="start" data-v="this_weekend">Neste fim de semana</button>
+            <button class="btn" data-next="scan" data-k="start" data-v="this_week">Esta semana</button>
+            <button class="btn ghost" data-next="scan" data-k="start" data-v="no_rush">Sem pressa</button>
+          </div>
+        </section>
+
+        <!-- LOADING / SCAN -->
+        <section id="scan" class="q scan" hidden>
+          <div class="loader"></div>
+          <div class="muted" id="scanText">Buscando perfis perto de você… 0%</div>
+        </section>
+
+        <!-- RESULTADO -->
+        <section id="result" class="q" hidden>
+          <h3 class="found" id="foundTitle">✔ Pronto! Encontramos perfis próximos</h3>
+          <p id="summary">Preferência de privacidade: — • Raio: — • Início: —</p>
+          <div class="grid" style="margin-top:12px">
+            <a id="cta" class="btn brand center" href="SUA_URL_AQUI">👉 Ver perfis agora</a>
+            <button class="btn ghost" id="restart">Refazer pré-check</button>
+          </div>
+          <p class="muted center" style="margin-top:8px">Resultados atualizados em tempo real. Pode esgotar.</p>
+        </section>
+
+        <!-- NEGADO 18- -->
+        <section id="deny" class="q center" hidden>
+          <h3>Conteúdo restrito a maiores de 18 anos.</h3>
+          <p class="muted">Quando completar 18 anos, volte para continuar.</p>
         </section>
       </div>
     </section>
 
-    <!-- RIGHT: TRUST / BENEFITS -->
-    <aside class="right" aria-hidden="false">
-      <div class="cover" role="img" aria-label="Happy couple"></div>
+    <!-- LADO DIREITO (prova/benefícios) -->
+    <aside class="right">
+      <div class="cover"></div>
       <div class="box">
-        <h3 style="margin:6px 0 10px">Why people choose HeartMatch</h3>
-        <div class="check" id="r1">Real people. No bots.</div>
-        <div class="check" id="r2">Compatibility by shared interests</div>
-        <div class="check" id="r3">Privacy-first & 18+</div>
-        <div class="check" id="r4">Free to start</div>
-        <p class="muted" style="margin-top:12px" id="r5">Tip: Clean, non-explicit content = ads approval & better CPM on Facebook/Taboola.</p>
+        <div class="check"><span class="dot"></span> Perfis verificados</div>
+        <div class="check"><span class="dot"></span> Sem bots • Privacidade primeiro</div>
+        <div class="check"><span class="dot"></span> Acesso gratuito para começar</div>
+        <p class="muted" style="margin-top:8px">Dica: mantenha linguagem neutra e sem nudez para melhor aprovação no Facebook/Taboola.</p>
       </div>
     </aside>
   </div>
 
   <footer>
-    <p id="i_footer">Informational/entertainment content. No explicit material displayed. By proceeding, you agree to our
-      <a class="clean" href="#" onclick="alert('Basic terms: informational content, no guarantees of results.');return false;">Terms</a>.
+    <p class="muted">Informativo/entretenimento. Não exibimos conteúdo explícito. Ao continuar, você concorda com
+      <a class="clean" href="#" onclick="alert('Termos simples: conteúdo informativo, sem garantias de resultado.');return false;">nossos termos</a>.
     </p>
-    <p class="muted">© <span id="year"></span> HeartMatch — All rights reserved.</p>
   </footer>
 
 <script>
-const state={gender:null,seeking:null,age:null,goal:null,step:1,total:6,city:null,region:null,country:null,cc:null,lang:'en'};
+const state={step:1,total:6,age_ok:null,privacy:null,radius:null,start:null,city:null,region:null,country:null,cc:null};
 const $=s=>document.querySelector(s);
-const show=s=>$(s).hidden=false, hide=s=>$(s).hidden=true;
+document.querySelectorAll('.btn[data-next]').forEach(b=>b.addEventListener('click',()=>advance(b)));
+$('#restart').addEventListener('click',()=>{Object.assign(state,{step:1,age_ok:null,privacy:null,radius:null,start:null}); render();});
+detectLocation().then(render);
 
-/* i18n (EN/PT/DA/NB/UK) — igual à versão anterior */
-const L={ /* ——— cortei aqui para caber ——— */ };
-/* Para usar sem erros, cole o objeto L completo da mensagem anterior
-   (en, pt, da, nb, uk) — é o mesmo, só reutilizar. */
-
-/* INIT */
-document.getElementById('year').textContent=new Date().getFullYear();
-bindEvents();
-detectLocation().then(updateUI);
-
-/* BIND sem inline (corrige CSP/hosts) */
-function bindEvents(){
-  document.querySelectorAll('[data-action="choose"]').forEach(btn=>{
-    btn.addEventListener('click',()=>{
-      const key=btn.dataset.key, val=btn.dataset.value;
-      choose(key,val);
-    });
-  });
-  $('#restartBtn').addEventListener('click',restart);
+function advance(btn){
+  const k=btn.dataset.k, v=btn.dataset.v, next=btn.dataset.next;
+  if(k) state[k]=v;
+  if(next==='deny'){ show('#deny'); hideAll('#step1','#step2','#step3','#step4','#scan','#result'); updateBar(1); return; }
+  if(next==='2') state.step=2;
+  else if(next==='3') state.step=3;
+  else if(next==='4') state.step=4;
+  else if(next==='scan'){ state.step=5; startScan(); }
+  render();
 }
 
-/* FLOW */
-function choose(key,value){
-  state[key]=value; try{localStorage.setItem('quizDating',JSON.stringify(state));}catch(e){}
-  if(state.step===1) state.step=2;
-  else if(state.step===2) state.step=3;
-  else if(state.step===3) state.step=4;
-  else if(state.step===4){ state.step=5; startScan(); }
-  updateUI();
-}
-function restart(){
-  Object.assign(state,{gender:null,seeking:null,age:null,goal:null,step:1});
-  $('#scanStatus').textContent='Searching matches… 0%';
-  updateUI(true);
-}
-
-/* UI */
-function updateUI(resetImg){
-  const where=prettyLoc(); const t=L[state.lang]||L.en;
-  setText('#brandName',t.brand); setText('#i_badge',t.badge);
-  setText('#title',t.t1(where)); setText('#subtitle',t.s1(where));
-  setText('#i_scanning',t.scanning); setText('#i_scan_sub',t.scanSub(where));
-  setText('#i_found',t.found(where)); setText('#i_b1',t.b1); setText('#i_b2',t.b2); setText('#i_b3',t.b3);
-  setText('#i_cta',t.cta); setText('#restartBtn',t.restart); setText('#i_slots',t.slots);
-  setText('#b_male',t.male); setText('#b_female',t.female);
-  setText('#b_seek_men',t.seek_men); setText('#b_seek_women',t.seek_women); setText('#b_seek_both',t.seek_both); setText('#b_seek_notsay',t.seek_notsay);
-  setText('#b_goal_serious',t.goal_serious); setText('#b_goal_casual',t.goal_casual); setText('#b_goal_friend',t.goal_friend); setText('#b_goal_undecided',t.goal_und);
-  setText('#loc-inline',where|| (state.lang==='pt'?'você':'you'));
-  setText('#loc-sub',where|| (state.lang==='pt'?'sua região':'your area'));
-  setText('#loc-scan',where|| (state.lang==='pt'?'você':'you'));
-  setText('#loc-result',where|| (state.lang==='pt'?'sua região':'your area'));
-
-  const pct=Math.min(Math.round((state.step-1)/state.total*100),100); $('#bar').style.width=pct+'%';
-
-  if(state.step===2){ setText('#title',t.t2); setText('#subtitle',t.s2); }
-  if(state.step===3){ setText('#title',t.t3); setText('#subtitle',t.s3); }
-  if(state.step===4){ setText('#title',t.t4); setText('#subtitle',t.s4); }
-
-  if(resetImg!==false){
-    $('#qimg').src=(state.step>=5)
-      ? 'https://images.unsplash.com/photo-1529156069898-49953e39b3ac?q=80&w=1200&auto=format&fit=crop'
-      : 'https://images.unsplash.com/photo-1542314831-068cd1dbfeeb?q=80&w=1200&auto=format&fit=crop';
-  }
-
-  hide('#step1'); hide('#step2'); hide('#step3'); hide('#step4'); hide('#scan'); hide('#result');
-  if(state.step===1) show('#step1'); else
-  if(state.step===2) show('#step2'); else
-  if(state.step===3) show('#step3'); else
-  if(state.step===4) show('#step4'); else
-  if(state.step===5) show('#scan'); else
+function render(){
+  updateBar(state.step);
+  hideAll('#step1','#step2','#step3','#step4','#scan','#result','#deny');
+  if(state.step===1) show('#step1');
+  if(state.step===2) show('#step2');
+  if(state.step===3) show('#step3');
+  if(state.step===4) show('#step4');
+  if(state.step===5) show('#scan');
   if(state.step===6){
-    const parts=[];
-    if(state.gender) parts.push(state.lang==='pt'?`Você é ${translateGender(state.gender,'pt')}`:`You are ${state.gender.toLowerCase()}`);
-    if(state.seeking && state.seeking!=='Prefer not to say') parts.push(state.lang==='pt'?`procura ${translateSeeking(state.seeking,'pt')}`:`looking for ${state.seeking.toLowerCase()}`);
-    if(state.age) parts.push((state.lang==='pt'?'na faixa ':'in the range ')+state.age);
-    if(state.goal && state.goal!=='Undecided') parts.push((state.lang==='pt'?'para ':'for ')+state.goal.toLowerCase());
-    if(where) parts.push((state.lang==='pt'?'em ':'in ')+where);
-    setText('#summary',parts.length?parts.join(', ')+'.':(state.lang==='pt'?'Baseado nas suas respostas, selecionamos pessoas que combinam com você.':'Based on your answers, we selected people that match you.'));
-    const url=new URL('SUA_URL_AQUI',location.href);
-    url.searchParams.set('utm_source',detectSource()); url.searchParams.set('utm_campaign','quiz_compatibility');
-    url.searchParams.set('g',state.gender||''); url.searchParams.set('s',state.seeking||''); url.searchParams.set('a',state.age||''); url.searchParams.set('goal',state.goal||'');
-    if(state.city) url.searchParams.set('loc_city',state.city); if(state.region) url.searchParams.set('loc_region',state.region);
-    if(state.country) url.searchParams.set('loc_country',state.country); if(state.cc) url.searchParams.set('cc',state.cc);
+    // título com cidade
+    const where = prettyLoc() || 'sua região';
+    $('#foundTitle').textContent = `✔ Pronto! Encontramos perfis em ${where}`;
+    // resumo
+    $('#summary').textContent = `Privacidade: ${label('privacy')} • Raio: ${label('radius')} • Início: ${label('start')}`;
+    // CTA + UTMs
+    const url=new URL('SUA_URL_AQUI', location.href);
+    url.searchParams.set('utm_source', detectSource());
+    url.searchParams.set('utm_campaign','pressel_precheck');
+    url.searchParams.set('privacy', state.privacy||'');
+    url.searchParams.set('radius', state.radius||'');
+    url.searchParams.set('start', state.start||'');
+    if(state.city) url.searchParams.set('loc_city', state.city);
+    if(state.region) url.searchParams.set('loc_region', state.region);
+    if(state.country) url.searchParams.set('loc_country', state.country);
+    if(state.cc) url.searchParams.set('cc', state.cc);
     $('#cta').href=url.toString();
     show('#result');
   }
 }
 
-/* Scan */
 function startScan(){
-  let pct=0; show('#scan');
-  const status=$('#scanStatus');
-  status.textContent=(state.lang==='pt'?'Procurando compatibilidades… ':'Searching matches… ')+pct+'%';
+  let pct=0; const t=$('#scanText'); t.textContent=`Buscando perfis perto de ${prettyLoc()||'você'}… ${pct}%`;
   const timer=setInterval(()=>{
     pct+=Math.floor(Math.random()*17)+6; if(pct>100)pct=100;
-    status.textContent=(state.lang==='pt'?'Procurando compatibilidades… ':'Searching matches… ')+pct+'%';
-    if(pct>=100){ clearInterval(timer); setTimeout(()=>{state.step=6; updateUI(false);},400); }
+    t.textContent=`Buscando perfis perto de ${prettyLoc()||'você'}… ${pct}%`;
+    if(pct>=100){ clearInterval(timer); state.step=6; render(); }
   },450);
 }
 
-/* Helpers */
-function setText(sel,val){const n=$(sel); if(n) n.textContent=val;}
-function prettyLoc(){ if(state.city&&state.region)return `${state.city}/${state.region}`; if(state.city&&state.country)return `${state.city}, ${state.country}`; if(state.region&&state.country)return `${state.region}, ${state.country}`; if(state.country)return state.country; return ''; }
-function translateGender(v,lang){ if(lang!=='pt') return v; return v==='Male'?'homem': v==='Female'?'mulher': v; }
-function translateSeeking(v,lang){ if(lang!=='pt') return v; return v==='Men'?'homens': v==='Women'?'mulheres': v==='Both'?'ambos':'—'; }
-function detectSource(){ const r=(document.referrer||'').toLowerCase(); if(r.includes('facebook'))return'facebook'; if(r.includes('taboola'))return'taboola'; return 'native'; }
+function updateBar(step){ $('#bar').style.width = Math.min(Math.round((step-1)/state.total*100),100)+'%'; }
+function hideAll(...ids){ ids.forEach(i=>$(i).hidden=true); }
+function show(id){ $(id).hidden=false; }
 
-/* GEO + AUTOLANG */
+function label(k){
+  const map={
+    privacy:{first_name_only:'Primeiro nome',name_and_photo:'Nome + foto',decide_later:'Decidir depois'},
+    radius:{same_city:'Mesma cidade', '15km':'Até 15 km', '50km':'Até 50 km', anywhere:'Qualquer lugar'},
+    start:{today:'Hoje',this_weekend:'Neste fim de semana',this_week:'Esta semana',no_rush:'Sem pressa'}
+  };
+  return (map[k] && map[k][state[k]]) || '—';
+}
+
+function detectSource(){ const r=(document.referrer||'').toLowerCase();
+  if(r.includes('facebook')) return 'facebook';
+  if(r.includes('taboola')) return 'taboola';
+  return 'native';
+}
+
+/* GEO por IP (apenas exibição e UTM) */
 async function detectLocation(){
   try{
     const a=await fetch('https://ipapi.co/json/').then(r=>r.ok?r.json():Promise.reject());
-    if(a){ Object.assign(state,{city:a.city||null,region:(a.region_code||a.region||'').replace('State of ','')||null,country:a.country_name||a.country||null,cc:(a.country||'').toUpperCase()}); chooseLangByCC(state.cc); return; }
+    if(a){ state.city=a.city||null; state.region=(a.region_code||a.region||'').replace('State of ','')||null; state.country=a.country_name||a.country||null; state.cc=(a.country||'').toUpperCase(); return; }
   }catch(e){}
   try{
     const b=await fetch('https://ipwho.is/').then(r=>r.ok?r.json():Promise.reject());
-    if(b&&b.success!==false){ Object.assign(state,{city:b.city||null,region:b.region||null,country:b.country||null,cc:(b.country_code||'').toUpperCase()}); chooseLangByCC(state.cc); return; }
+    if(b && b.success!==false){ state.city=b.city||null; state.region=b.region||null; state.country=b.country||null; state.cc=(b.country_code||'').toUpperCase(); }
   }catch(e){}
-  const docLang=(document.documentElement.getAttribute('lang')||'en').slice(0,2); state.lang=['en','pt','da','nb','uk'].includes(docLang)?docLang:'en';
 }
-function chooseLangByCC(cc){ cc=(cc||'').toUpperCase(); if(cc==='DK')state.lang='da'; else if(cc==='NO')state.lang='nb'; else if(cc==='UA')state.lang='uk'; else if(cc==='BR'||cc==='PT')state.lang='pt'; else state.lang='en'; }
+function prettyLoc(){ if(state.city && state.region) return `${state.city}/${state.region}`; if(state.city && state.country) return `${state.city}, ${state.country}`; if(state.region && state.country) return `${state.region}, ${state.country}`; if(state.country) return state.country; return ''; }
 </script>
 </body>
 </html>
