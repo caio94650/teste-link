@@ -41,8 +41,8 @@
 <div class="wrap">
   <div class="card" id="app">
     <div class="brand"><span class="brand-dot"></span><span class="pill">Compatibilidade • Passo a passo</span></div>
-    <h1 id="title">Vamos filtrar perfis para você</h1>
-    <p id="subtitle">Responda 3 perguntas rápidas para encontrar pessoas compatíveis perto de você.</p>
+    <h1 id="title">Perfis próximos de <span id="loc-inline">você</span></h1>
+    <p id="subtitle">Responda 3 perguntas rápidas para encontrar pessoas compatíveis em <span id="loc-sub">sua região</span>.</p>
 
     <div class="progress"><div class="bar" id="bar"></div></div>
 
@@ -51,8 +51,8 @@
 
     <!-- PASSO 1 -->
     <section id="step1" class="grid grid-2">
-      <button class="btn" data-val="Homem" onclick="choose('gender','Homem')">Sou Homem</button>
-      <button class="btn" data-val="Mulher" onclick="choose('gender','Mulher')">Sou Mulher</button>
+      <button class="btn" onclick="choose('gender','Homem')">Sou Homem</button>
+      <button class="btn" onclick="choose('gender','Mulher')">Sou Mulher</button>
     </section>
 
     <!-- PASSO 2 -->
@@ -82,14 +82,14 @@
     <!-- LOADING -->
     <section id="scan" class="hidden center">
       <p class="pill"><span class="loader"></span> Analisando respostas…</p>
-      <p class="muted">Filtrando perfis próximos com base nas suas preferências.</p>
+      <p class="muted">Filtrando perfis próximos de <span id="loc-scan">você</span> com base nas suas preferências.</p>
       <img src="https://i.ibb.co/zV1xhvN/chat-sedutor.jpg" alt="Busca" class="q-img">
       <div id="scanStatus" class="muted">Procurando compatibilidades… 0%</div>
     </section>
 
     <!-- RESULTADO -->
     <section id="result" class="hidden">
-      <h2 class="found">✔ Encontramos 7 perfis com alta compatibilidade</h2>
+      <h2 class="found">✔ Encontramos 7 perfis com alta compatibilidade em <span id="loc-result">sua região</span></h2>
       <p id="summary">Baseado nas suas respostas, selecionamos pessoas que combinam com você.</p>
       <ul class="muted" id="bullets" style="padding-left:18px;margin:10px 0 0">
         <li>Perfis verificados e com interesses em comum</li>
@@ -110,18 +110,23 @@
 </div>
 
 <script>
-  // estado
-  const state = { gender:null, seeking:null, age:null, goal:null, step:1, total:6 };
+  // =======================
+  // ESTADO
+  // =======================
+  const state = { gender:null, seeking:null, age:null, goal:null, step:1, total:6, city:null, region:null, country:null };
   const el = s => document.querySelector(s);
   const show = id => el(id).classList.remove('hidden');
   const hide = id => el(id).classList.add('hidden');
 
   // inicial
+  detectLocation(); // tenta localizar por IP
   updateUI();
 
+  // =======================
+  // QUIZ
+  // =======================
   function choose(key,value){
     state[key]=value;
-    // salva (opcional)
     try{ localStorage.setItem('quizDating', JSON.stringify(state)); }catch(e){}
     next();
   }
@@ -146,18 +151,25 @@
     el('#bar').style.width = percent + '%';
 
     // titles
+    const where = prettyLoc();
     const titles = {
-      1: {t:'Vamos filtrar perfis para você', s:'Responda 3 perguntas rápidas para encontrar pessoas compatíveis perto de você.', img:'https://i.ibb.co/3sZ9dXx/casal-feliz.jpg'},
+      1: {t:`Perfis próximos de ${where || 'você'}`, s:`Responda 3 perguntas rápidas para encontrar pessoas compatíveis em ${where || 'sua região'}.`, img:'https://i.ibb.co/3sZ9dXx/casal-feliz.jpg'},
       2: {t:'Quem você quer conhecer?', s:'Isso ajuda a mostrar apenas pessoas do seu interesse.', img:'https://i.ibb.co/3sZ9dXx/casal-feliz.jpg'},
       3: {t:'Qual faixa etária te interessa?', s:'Você pode ajustar depois, se quiser.', img:'https://i.ibb.co/3sZ9dXx/casal-feliz.jpg'},
       4: {t:'O que você busca agora?', s:'Sem julgamentos — escolha o que faz sentido pra você.', img:'https://i.ibb.co/3sZ9dXx/casal-feliz.jpg'},
-      5: {t:'Analisando suas respostas…', s:'Filtrando perfis próximos com base nas suas preferências.', img:'https://i.ibb.co/zV1xhvN/chat-sedutor.jpg'},
+      5: {t:'Analisando suas respostas…', s:`Filtrando perfis próximos de ${where || 'você'} com base nas suas preferências.`, img:'https://i.ibb.co/zV1xhvN/chat-sedutor.jpg'},
       6: {t:'Pronto! Achamos combinações ideais', s:'Veja seus perfis compatíveis e inicie a conversa agora mesmo.', img:'https://i.ibb.co/zV1xhvN/chat-sedutor.jpg'}
     };
     const cur = titles[state.step] || titles[1];
     el('#title').textContent = cur.t;
     el('#subtitle').textContent = cur.s;
     if(resetImg!==false){ el('#qimg').src = cur.img; }
+
+    // injeta localização nos pontos-chave
+    setText('#loc-inline', where || 'você');
+    setText('#loc-sub', where || 'sua região');
+    setText('#loc-scan', where || 'você');
+    setText('#loc-result', where || 'sua região');
 
     // steps visibility
     ['#step1','#step2','#step3','#step4','#scan','#result'].forEach(id=>hide(id));
@@ -173,13 +185,22 @@
       if(state.seeking && state.seeking!=='Prefiro não dizer') parts.push(`procura ${state.seeking.toLowerCase()}`);
       if(state.age) parts.push(`na faixa ${state.age}`);
       if(state.goal && state.goal!=='Indefinido') parts.push(`para ${state.goal.toLowerCase()}`);
+      if(where) parts.push(`em ${where}`);
       el('#summary').textContent = parts.length ? parts.join(', ') + '.' : 'Baseado nas suas respostas, selecionamos pessoas que combinam com você.';
-      // acrescenta UTM no CTA automaticamente
+
+      // CTA com UTM + geoloc
       const url = new URL('SUA_URL_AQUI', location.href);
       url.searchParams.set('utm_source','taboola');
       url.searchParams.set('utm_campaign','quiz_compatibilidade');
-      try{ url.searchParams.set('g', state.gender||''); url.searchParams.set('s', state.seeking||''); url.searchParams.set('a', state.age||''); url.searchParams.set('goal', state.goal||''); }catch(e){}
+      url.searchParams.set('g', state.gender||'');
+      url.searchParams.set('s', state.seeking||'');
+      url.searchParams.set('a', state.age||'');
+      url.searchParams.set('goal', state.goal||'');
+      if(state.city) url.searchParams.set('loc_city', state.city);
+      if(state.region) url.searchParams.set('loc_region', state.region);
+      if(state.country) url.searchParams.set('loc_country', state.country);
       el('#cta').href = url.toString();
+
       show('#result');
     }
   }
@@ -188,7 +209,7 @@
     let pct = 0;
     const status = el('#scanStatus');
     const timer = setInterval(()=>{
-      pct += Math.floor(Math.random()*17)+6; // passos irregulares
+      pct += Math.floor(Math.random()*17)+6;
       if(pct>100) pct=100;
       status.textContent = `Procurando compatibilidades… ${pct}%`;
       if(pct>=100){
@@ -196,6 +217,45 @@
         setTimeout(()=>{ state.step=6; updateUI(false); }, 400);
       }
     }, 450);
+  }
+
+  function setText(sel, val){ const n = el(sel); if(n) n.textContent = val; }
+  function prettyLoc(){
+    if(state.city && state.region){ return `${state.city}/${state.region}`; }
+    if(state.city && state.country){ return `${state.city}, ${state.country}`; }
+    if(state.region && state.country){ return `${state.region}, ${state.country}`; }
+    if(state.country){ return state.country; }
+    return '';
+  }
+
+  // =======================
+  // GEOLOCALIZAÇÃO POR IP
+  // =======================
+  async function detectLocation(){
+    try{
+      // 1) Tenta ipapi.co (rápido e com CORS)
+      let data = await fetch('https://ipapi.co/json/').then(r=>r.ok?r.json():Promise.reject());
+      if(data){
+        state.city   = data.city || null;
+        state.region = (data.region_code || data.region || '').replace('State of ','') || null;
+        state.country= data.country_name || data.country || null;
+        updateUI(false);
+        return;
+      }
+    }catch(e){}
+    try{
+      // 2) Fallback: ipwho.is
+      let data = await fetch('https://ipwho.is/').then(r=>r.ok?r.json():Promise.reject());
+      if(data && data.success!==false){
+        state.city   = data.city || null;
+        state.region = data.region || null;
+        state.country= data.country || null;
+        updateUI(false);
+        return;
+      }
+    }catch(e){}
+    // 3) Sem localização — segue normal
+    updateUI(false);
   }
 </script>
 </body>
